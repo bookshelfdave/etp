@@ -27,6 +27,9 @@ An etp term is made up of any of these classes:
 - ETPTerm
 - ETPTuple
 
+# Screenshot?
+![screenshot](https://www.evernote.com/shard/s55/sh/da977209-eb57-4c39-9830-e1c83f4cce73/80af6f444a181f40c9d1135c1a681ce0/deep/0/Screenshot%204/18/13%204:02%20PM.jpg "Screenshot")
+
 # TODO
 
 	$\n
