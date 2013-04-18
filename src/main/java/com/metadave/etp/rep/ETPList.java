@@ -1,10 +1,19 @@
 package com.metadave.etp.rep;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ETPList extends ETPTerm<List<ETPTerm<?>>>{
     public ETPList(List value) {
         super(value);
+    }
+
+    public ETPList(ETPTerm<?> ... terms) {
+        List<ETPTerm<?>> ts = new ArrayList<ETPTerm<?>>();
+        for(ETPTerm<?> t : terms) {
+            ts.add(t);
+        }
+        this.value = ts;
     }
 
     @Override

@@ -9,8 +9,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import java.io.File;
 
 public class ETP {
-
-    public ETPTerm<?> parse(String s) {
+    public static ETPTerm<?> parse(String s) {
         ANTLRInputStream input = new ANTLRInputStream(s);
         ETPLexer lexer = new ETPLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);

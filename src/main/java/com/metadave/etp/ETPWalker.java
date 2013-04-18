@@ -39,13 +39,15 @@ public class ETPWalker  extends ETPBaseListener {
             setValue(ctx, getValue(ctx.etp_string()));
         } else if(ctx.etp_tuple() != null) {
             setValue(ctx, getValue(ctx.etp_tuple()));
+        } else if(ctx.etp_binary() != null) {
+            setValue(ctx, getValue(ctx.etp_binary()));
         }
     }
 
     @Override
     public void exitEtp_float(ETPParser.Etp_floatContext ctx) {
         String v = ctx.getText();
-        setValue(ctx, new ETPFloat(Float.parseFloat(v)));
+        setValue(ctx, new ETPDouble(Double.parseDouble(v)));
     }
 
     @Override
@@ -109,7 +111,40 @@ public class ETPWalker  extends ETPBaseListener {
         }
     }
 
-//    @Test
+    @Override
+    public void exitEtp_binary(ETPParser.Etp_binaryContext ctx) {
+        List<ETPBinary.ETPBinaryValue> segments = new ArrayList<ETPBinary.ETPBinaryValue>();
+        for(ETPParser.Etp_binary_itemContext segment : ctx.segments) {
+            ETPBinary.ETPBinaryValue s = (ETPBinary.ETPBinaryValue)getValue(segment);
+            segments.add(s);
+        }
+        ETPBinary b = new ETPBinary(segments);
+        setValue(ctx, b);
+    }
+
+    @Override
+    public void exitEtp_binary_item(ETPParser.Etp_binary_itemContext ctx) {
+        ETPBinary.ETPBinaryValue<?> v = null;
+        if(ctx.val != null) {
+            if(ctx.size != null) {
+                 v = new ETPBinary.BinInt(
+                            Long.parseLong(ctx.val.getText()),
+                            Integer.parseInt(ctx.size.getText()));
+            } else {
+                v = new ETPBinary.BinInt(Long.parseLong(ctx.val.getText()));
+            }
+        } else if(ctx.BINSTRING() != null) {
+            if(ctx.size != null) {
+                v = new ETPBinary.BinString(stripQuotes(ctx.BINSTRING().getText()),
+                        Integer.parseInt(ctx.size.getText()));
+            } else {
+                v = new ETPBinary.BinString(stripQuotes(ctx.BINSTRING().getText()));
+            }
+        }
+        setValue(ctx, v);
+    }
+
+    //    @Test
 //    public void testStripQuotes() {
 //        // TODO: edge cases
 //        //assertEquals("this is \"a test\"", stripQuotes("\"this is \"a test\"\""));

@@ -1,7 +1,11 @@
 package com.metadave.etp.rep;
 
-public class ETPTerm<T> {
+public abstract class ETPTerm<T> {
     protected T value;
+
+    public ETPTerm() {
+
+    }
 
     public ETPTerm(T value) {
         this.value = value;

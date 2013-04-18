@@ -57,7 +57,7 @@ public class ETPViewer extends JFrame{
         File f = new File("/Users/dparfitt/basho/riak/dev/dev1/etc/app.config");
         String line =
                 org.apache.commons.io.FileUtils.readFileToString(f);
-        ETPTerm<?> t = new ETP().parse(line);
+        ETPTerm<?> t = ETP.parse(line);
         ETPViewer v = new ETPViewer();
         v.addNodes(t);
         v.setSize(1024, 768);
