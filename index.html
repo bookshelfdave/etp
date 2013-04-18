@@ -31,22 +31,20 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h1>etp</h1>
+        <h2>ETP: An Erlang Term Parser for Java.</h2>
 
-<p>Erlang Term Parser</p>
+<h3>Status</h3>
 
-<h1>Status</h1>
+<p>I wrote it in a couple hours, it might need some love. It parses a Riak app.config file without breaking a sweat.</p>
 
-<p>I wrote it in a couple hours, it might need some love. </p>
-
-<h1>Building</h1>
+<h3>Building</h3>
 
 <p>You'll need Maven to build etp.</p>
 
 <pre><code>mvn package
 </code></pre>
 
-<h1>Usage</h1>
+<h3>Usage</h3>
 
 <pre><code>EPTTerm com.metadave.etp.ETP.parse(String s)
 
@@ -70,18 +68,18 @@ EPTTerm com.metadave.etp.ETP.parse(InputStream is)
 <li>ETPString</li>
 <li>ETPTerm</li>
 <li>ETPTuple</li>
-</ul><h1>Rendering</h1>
+</ul><h3>Rendering</h3>
 
 <p>Call <code>toString()</code> on a <code>ETPTerm</code> object will render a valid Erlang term to a <code>String</code>.</p>
 
-<h1>TODO</h1>
+<h3>TODO</h3>
 
 <pre><code>$\n
 2#101
 etc
 </code></pre>
 
-<h1>License</h1>
+<h3>License</h3>
 
 <p><a href="http://www.apache.org/licenses/LICENSE-2.0.html">http://www.apache.org/licenses/LICENSE-2.0.html</a></p>
 
