@@ -1,19 +1,19 @@
-etp
-===
 
-Erlang Term Parser
 
-# Status
+## ETP: An Erlang Term Parser for Java. 
 
-  I wrote it in a couple hours, it might need some love. 
 
-# Building
+### Status
+
+  I wrote it in a couple hours, it might need some love. It parses a Riak app.config file without breaking a sweat.
+
+### Building
 
 You'll need Maven to build etp.
 
 	mvn package
 
-# Usage
+### Usage
 
 
 	EPTTerm com.metadave.etp.ETP.parse(String s)
@@ -37,18 +37,18 @@ An etp term is made up of any of these classes:
 - ETPTuple
 
 
-# Rendering
+### Rendering
 
 Call `toString()` on a `ETPTerm` object will render a valid Erlang term to a `String`.
 
 
-# TODO
+### TODO
 
 	$\n
 	2#101
 	etc
 	
-#License
+### License
 
 http://www.apache.org/licenses/LICENSE-2.0.html
 
