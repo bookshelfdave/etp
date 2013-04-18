@@ -68,7 +68,7 @@ public class ETPWalker  extends ETPBaseListener {
 
     @Override
     public void exitEtp_string(ETPParser.Etp_stringContext ctx) {
-        String v = ctx.getText();
+        String v = stripQuotes(ctx.getText());
         setValue(ctx, new ETPString(v));
     }
 
