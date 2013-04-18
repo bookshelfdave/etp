@@ -3,6 +3,15 @@ etp
 
 Erlang Term Parser
 
+# Status
+
+  I wrote it in a couple hours, it might need some love. 
+
+# Building
+
+You'll need Maven to build etp.
+
+	mvn package
 
 # Usage
 
@@ -26,6 +35,11 @@ An etp term is made up of any of these classes:
 - ETPString
 - ETPTerm
 - ETPTuple
+
+
+# Rendering
+
+Call `toString()` on a `ETPTerm` object will render a valid Erlang term to a `String`.
 
 
 # TODO
