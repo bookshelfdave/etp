@@ -1,7 +1,9 @@
 package com.metadave.etp;
 
 
-import com.metadave.etp.rep.*;
+import com.metadave.etp.rep.ETPList;
+import com.metadave.etp.rep.ETPTerm;
+import com.metadave.etp.rep.ETPTuple;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -57,7 +59,7 @@ public class ETPViewer extends JFrame{
         File f = new File("/Users/dparfitt/basho/riak/dev/dev1/etc/app.config");
         String line =
                 org.apache.commons.io.FileUtils.readFileToString(f);
-        ETPTerm<?> t = ETP.parse(line);
+        ETPTerm t = ETP.parse(line);
         ETPViewer v = new ETPViewer();
         v.addNodes(t);
         v.setSize(1024, 768);

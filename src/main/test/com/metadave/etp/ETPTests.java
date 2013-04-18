@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ETPTests {
 
@@ -110,4 +110,24 @@ public class ETPTests {
             assertEquals("<<1,2,\"foo\">>", t.toString());
         }
     }
+
+    @Test
+    public void testPIDs() {
+        ETPTerm<?> t = ETP.parse("<0.33.0>");
+        assertEquals("<0.33.0>", t.toString());
+    }
+
+    @Test
+    public void testRef() {
+        ETPTerm<?> t = ETP.parse("#Ref<0.0.0.32>");
+        assertEquals("#Ref<0.0.0.32>", t.toString());
+    }
+
+    @Test
+    public void testFun() {
+        ETPTerm<?> t = ETP.parse("#Fun<erl_eval.6.39074546>");
+        assertEquals("#Fun<erl_eval.6.39074546>", t.toString());
+    }
+
+
 }

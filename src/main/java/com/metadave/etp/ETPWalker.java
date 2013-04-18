@@ -41,6 +41,12 @@ public class ETPWalker  extends ETPBaseListener {
             setValue(ctx, getValue(ctx.etp_tuple()));
         } else if(ctx.etp_binary() != null) {
             setValue(ctx, getValue(ctx.etp_binary()));
+        } else if(ctx.etp_pid() != null) {
+            setValue(ctx, getValue(ctx.etp_pid()));
+        } else if(ctx.etp_ref() != null) {
+            setValue(ctx, getValue(ctx.etp_ref()));
+        } else if(ctx.etp_fun() != null) {
+            setValue(ctx, getValue(ctx.etp_fun()));
         }
     }
 
@@ -133,15 +139,30 @@ public class ETPWalker  extends ETPBaseListener {
             } else {
                 v = new ETPBinary.BinInt(Long.parseLong(ctx.val.getText()));
             }
-        } else if(ctx.BINSTRING() != null) {
+        } else if(ctx.STRING() != null) {
             if(ctx.size != null) {
-                v = new ETPBinary.BinString(stripQuotes(ctx.BINSTRING().getText()),
+                v = new ETPBinary.BinString(stripQuotes(ctx.STRING().getText()),
                         Integer.parseInt(ctx.size.getText()));
             } else {
-                v = new ETPBinary.BinString(stripQuotes(ctx.BINSTRING().getText()));
+                v = new ETPBinary.BinString(stripQuotes(ctx.STRING().getText()));
             }
         }
         setValue(ctx, v);
+    }
+
+    @Override
+    public void exitEtp_pid(ETPParser.Etp_pidContext ctx) {
+        setValue(ctx, new ETPPid(ctx.getText()));
+    }
+
+    @Override
+    public void exitEtp_ref(ETPParser.Etp_refContext ctx) {
+        setValue(ctx, new ETPRef(ctx.getText()));
+    }
+
+    @Override
+    public void exitEtp_fun(ETPParser.Etp_funContext ctx) {
+        setValue(ctx, new ETPFun(ctx.getText()));
     }
 
     //    @Test
