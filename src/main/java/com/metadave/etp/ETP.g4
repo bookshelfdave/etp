@@ -1,18 +1,22 @@
 grammar ETP;
 
-term:       
-    INT
-    | FLOAT
-    | STRING
-    | bool
-    | atom;
+etp_term:
+    etp_int
+    | etp_float
+    | etp_string
+    | etp_bool
+    | etp_atom
+    | etp_list
+    | etp_tuple;
 
 // TODO: binaries, $\n, 2#101
-
-atom: ID | IDSTRING;
-bool: TRUE | FALSE;
-list: LSQUARE (listitems+=term (COMMA listitems+=term)*)? RSQUARE;
-tuple: LCURLY (tupleitems+=term (COMMA tupleitems+=term)*)? RCURLY;
+etp_int: INT;
+etp_float: FLOAT;
+etp_string: STRING;
+etp_atom: ID | IDSTRING;
+etp_bool: TRUE | FALSE;
+etp_list: LSQUARE (listitems+=etp_term (COMMA listitems+=etp_term)*)? RSQUARE;
+etp_tuple: LCURLY (tupleitems+=etp_term (COMMA tupleitems+=etp_term)*)? RCURLY;
        
 COMMA:         ',';
 LSQUARE:       '[';
@@ -27,7 +31,7 @@ TRUE:          'true';
 FALSE:         'false';
 AT:            '@';
 
-ID          :       [a-z][A-Za-z_@]*;
+ID          :       [a-z][A-Za-z_@0-9]*;
 IDSTRING  :  '\'' (IDESC|.)*? '\'';
 
 fragment IDESC : '\\\'' | '\\\\' ;
@@ -42,7 +46,7 @@ fragment DIGIT  : '0' .. '9';
 STRING  :  '"' (ESC|.)*? '"';
 fragment ESC : '\\"' | '\\\\' ;
 
-LINE_COMMENT  : '//' .*? '\r'? '\n' -> skip ;
-COMMENT       : '/*' .*? '*/'       -> skip ;
+LINE_COMMENT  : '%' .*? '\r'? '\n' -> skip ;
+//COMMENT       : '/*' .*? '*/'       -> skip ;
 
 WS      :       [ \t\r\n]+ -> skip;
