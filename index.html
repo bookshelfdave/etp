@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Etp : Erlang Term Parser" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Etp</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/metadave/etp">View on GitHub</a>
+
+          <h1 id="project_title">Etp</h1>
+          <h2 id="project_tagline">Erlang Term Parser</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/metadave/etp/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/metadave/etp/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>etp</h1>
+
+<p>Erlang Term Parser</p>
+
+<h1>Status</h1>
+
+<p>I wrote it in a couple hours, it might need some love. </p>
+
+<h1>Building</h1>
+
+<p>You'll need Maven to build etp.</p>
+
+<pre><code>mvn package
+</code></pre>
+
+<h1>Usage</h1>
+
+<pre><code>EPTTerm com.metadave.etp.ETP.parse(String s)
+
+EPTTerm com.metadave.etp.ETP.parse(InputStream is)
+</code></pre>
+
+<p>An etp term is made up of any of these classes:</p>
+
+<ul>
+<li>ETPTerm (abstract)<br>
+</li>
+<li>ETPAtom</li>
+<li>ETPBinary</li>
+<li>ETPBoolean</li>
+<li>ETPDouble</li>
+<li>ETPFun</li>
+<li>ETPInteger</li>
+<li>ETPList</li>
+<li>ETPPid</li>
+<li>ETPRef</li>
+<li>ETPString</li>
+<li>ETPTerm</li>
+<li>ETPTuple</li>
+</ul><h1>Rendering</h1>
+
+<p>Call <code>toString()</code> on a <code>ETPTerm</code> object will render a valid Erlang term to a <code>String</code>.</p>
+
+<h1>TODO</h1>
+
+<pre><code>$\n
+2#101
+etc
+</code></pre>
+
+<h1>License</h1>
+
+<p><a href="http://www.apache.org/licenses/LICENSE-2.0.html">http://www.apache.org/licenses/LICENSE-2.0.html</a></p>
+
+<hr><p>© 2013 Dave Parfitt</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Etp maintained by <a href="https://github.com/metadave">metadave</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
