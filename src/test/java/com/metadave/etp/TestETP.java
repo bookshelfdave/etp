@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class ETPTests {
+public class TestETP {
 
     @Test
     public void testString() {
