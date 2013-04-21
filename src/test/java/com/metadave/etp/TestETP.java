@@ -13,9 +13,10 @@ public class TestETP {
 
     @Test
     public void testString() {
-        ETPTerm<?> t = ETP.parse("hello");
-        assertEquals("hello", t.toString());
-        assertEquals(new ETPString("hello").toString(), "\"" + t.toString() + "\"");
+        ETPTerm<?> t = ETP.parse("\"hello\"");
+        assertEquals("hello",t.getValue());
+        assertEquals("\"hello\"", t.toString());
+        assertEquals(new ETPString("\"hello\"").toString(), "\"" + t.toString() + "\"");
     }
 
     @Test
