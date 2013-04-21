@@ -70,7 +70,7 @@ public class ETPWalker  extends ETPBaseListener {
         if(ctx.ID() != null) {
             setValue(ctx, new ETPAtom(ctx.ID().getText()));
         } else if(ctx.IDSTRING() != null) {
-            System.err.println("NOT IMPLEMENTED");
+            setValue(ctx, new ETPQuotedAtom(stripQuotes(ctx.IDSTRING().getText())));
         }
     }
 

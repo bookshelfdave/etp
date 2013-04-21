@@ -25,6 +25,7 @@ An etp term is made up of any of these classes:
 
 - ETPTerm (abstract)	
 - ETPAtom
+- ETPQuotedAtom
 - ETPBinary
 - ETPBoolean
 - ETPDouble

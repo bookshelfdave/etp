@@ -62,9 +62,20 @@ public class TestETP {
 
     @Test
     public void testAtom() {
-        ETPTerm<?> t = ETP.parse("helloworld");
-        assertEquals("helloworld", t.toString());
-        assertEquals(new ETPAtom("helloworld").getValue(), t.getValue());
+        {
+            ETPTerm<?> t = ETP.parse("helloworld");
+            assertEquals("helloworld", t.toString());
+            assertEquals(new ETPAtom("helloworld").getValue(), t.getValue());
+        }
+
+        {
+            ETPTerm<?> t = ETP.parse("'helloworld@this is a special atom'");
+            assertEquals("helloworld@this is a special atom", t.getValue());
+            assertEquals("'helloworld@this is a special atom'", t.toString());
+            assertEquals(new ETPQuotedAtom("helloworld@this is a special atom").getValue(), t.getValue());
+        }
+
+
     }
 
     @Test
