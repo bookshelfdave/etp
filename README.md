@@ -1,11 +1,12 @@
 
-
 ## ETP: An Erlang Term Parser for Java. 
 
 
 ### Status
 
-  I wrote it in a couple hours, it might need some love. It parses a Riak app.config file without breaking a sweat.
+  It needs a some cleanup, but I should have it done soon.
+
+  Etp parses a Riak app.config file without breaking a sweat.
 
 ### Building
 
