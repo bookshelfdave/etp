@@ -33,16 +33,7 @@
       <section id="main_content" class="inner">
         <h2>ETP: An Erlang Term Parser for Java.</h2>
 
-<h3>Status</h3>
-
-<p>I wrote it in a couple hours, it might need some love. It parses a Riak app.config file without breaking a sweat.</p>
-
-<h3>Building</h3>
-
-<p>You'll need Maven to build etp.</p>
-
-<pre><code>mvn package
-</code></pre>
+<p>Given a String of Erlang terms, ETP will parse the string into a tree of ETP Java objects.</p>
 
 <h3>Usage</h3>
 
@@ -57,6 +48,7 @@ EPTTerm com.metadave.etp.ETP.parse(InputStream is)
 <li>ETPTerm (abstract)<br>
 </li>
 <li>ETPAtom</li>
+<li>ETPQuotedAtom</li>
 <li>ETPBinary</li>
 <li>ETPBoolean</li>
 <li>ETPDouble</li>
@@ -68,7 +60,51 @@ EPTTerm com.metadave.etp.ETP.parse(InputStream is)
 <li>ETPString</li>
 <li>ETPTerm</li>
 <li>ETPTuple</li>
-</ul><h3>Rendering</h3>
+</ul><h3>Example</h3>
+
+<pre><code>ETPTuple tuple = (ETPTuple)ETP.parse(
+                                "{mylist, [1,2,3,4], \n" +
+                                "my_string, \"Hello world\"}");
+ETPAtom atom = (ETPAtom)tuple.getValue().get(0);
+System.out.println("Atom = " + atom);
+
+ETPList list = (ETPList)tuple.getValue().get(1);
+// use getValue() to access the list of terms
+for(ETPTerm v : list.getValue()) {
+    System.out.println("  List item " + v);
+}
+ETPAtom my_string_atom = (ETPAtom)tuple.getValue().get(2);
+System.out.println(my_string_atom);
+
+ETPString s = (ETPString)tuple.getValue().get(3);
+System.out.println(s.getValue()); // getValue() gets the "raw" value
+System.out.println(s.toString()); // toString() gets the string representation
+</code></pre>
+
+<p>yields the following output:</p>
+
+<pre><code>Atom = mylist
+  List item 1
+  List item 2
+  List item 3
+  List item 4
+my_string
+Hello world
+"Hello world"
+</code></pre>
+
+<h3>Status</h3>
+
+<p>Etp parses a Riak app.config file without breaking a sweat.</p>
+
+<h3>Building</h3>
+
+<p>You'll need Maven to build etp.</p>
+
+<pre><code>mvn package
+</code></pre>
+
+<h3>Rendering</h3>
 
 <p>Call <code>toString()</code> on a <code>ETPTerm</code> object will render a valid Erlang term to a <code>String</code>.</p>
 
