@@ -25,6 +25,41 @@ An etp term is made up of any of these classes:
 - ETPTerm
 - ETPTuple
 
+### Example
+
+```
+ETPTuple tuple = (ETPTuple)ETP.parse(
+                "{mylist, [1,2,3,4], \n" +
+                 "my_string, \"Hello world\"}");
+        ETPAtom atom = (ETPAtom)tuple.getValue().get(0);
+        System.out.println("Atom = " + atom);
+
+        // use getValue() to access the list of terms
+        ETPList list = (ETPList)tuple.getValue().get(1);
+        for(ETPTerm v : list.getValue()) {
+            System.out.println("  List item " + v);
+        }
+        ETPAtom my_string_atom = (ETPAtom)tuple.getValue().get(2);
+        System.out.println(my_string_atom);
+
+        ETPString s = (ETPString)tuple.getValue().get(3);
+        System.out.println(s.getValue()); // getValue() gets the "raw" value
+        System.out.println(s.toString()); // toString() gets the string representation
+```
+
+yields the following output:
+
+```
+Atom = mylist
+  List item 1
+  List item 2
+  List item 3
+  List item 4
+my_string
+Hello world
+"Hello world"
+```
+
 ### Status
 
   Etp parses a Riak app.config file without breaking a sweat.
