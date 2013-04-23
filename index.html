@@ -63,8 +63,8 @@ EPTTerm com.metadave.etp.ETP.parse(InputStream is)
 </ul><h3>Example</h3>
 
 <pre><code>ETPTuple tuple = (ETPTuple)ETP.parse(
-                                "{mylist, [1,2,3,4], \n" +
-                                "my_string, \"Hello world\"}");
+                "{mylist, [1,2,3,4], \n" +
+                 "my_string, \"Hello world\"}");
 ETPAtom atom = (ETPAtom)tuple.getValue().get(0);
 System.out.println("Atom = " + atom);
 
@@ -79,6 +79,12 @@ System.out.println(my_string_atom);
 ETPString s = (ETPString)tuple.getValue().get(3);
 System.out.println(s.getValue()); // getValue() gets the "raw" value
 System.out.println(s.toString()); // toString() gets the string representation
+
+// you can set values on the ETP structure and call toString() to render
+// a new Erlang term
+atom.setValue("new_atom_value");
+list.getValue().add(new ETPInteger(100));
+System.out.println(tuple.toString());
 </code></pre>
 
 <p>yields the following output:</p>
@@ -91,6 +97,7 @@ System.out.println(s.toString()); // toString() gets the string representation
 my_string
 Hello world
 "Hello world"
+{new_atom_value,[1,2,3,4,100],my_string,"Hello world"}
 </code></pre>
 
 <h3>Status</h3>
