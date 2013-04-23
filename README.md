@@ -87,7 +87,7 @@ Call `toString()` on a `ETPTerm` object will render a valid Erlang term to a `St
 
 	$\n
 	2#101
-	etc
+	Sontatype OSS
 	
 ### License
 
