@@ -28,23 +28,29 @@ An etp term is made up of any of these classes:
 ### Example
 
 ```
-ETPTuple tuple = (ETPTuple)ETP.parse(
-                                "{mylist, [1,2,3,4], \n" +
-                                "my_string, \"Hello world\"}");
-ETPAtom atom = (ETPAtom)tuple.getValue().get(0);
-System.out.println("Atom = " + atom);
+        ETPTuple tuple = (ETPTuple)ETP.parse(
+                "{mylist, [1,2,3,4], \n" +
+                 "my_string, \"Hello world\"}");
+        ETPAtom atom = (ETPAtom)tuple.getValue().get(0);
+        System.out.println("Atom = " + atom);
 
-ETPList list = (ETPList)tuple.getValue().get(1);
-// use getValue() to access the list of terms
-for(ETPTerm v : list.getValue()) {
-	System.out.println("  List item " + v);
-}
-ETPAtom my_string_atom = (ETPAtom)tuple.getValue().get(2);
-System.out.println(my_string_atom);
+        ETPList list = (ETPList)tuple.getValue().get(1);
+        // use getValue() to access the list of terms
+        for(ETPTerm v : list.getValue()) {
+            System.out.println("  List item " + v);
+        }
+        ETPAtom my_string_atom = (ETPAtom)tuple.getValue().get(2);
+        System.out.println(my_string_atom);
 
-ETPString s = (ETPString)tuple.getValue().get(3);
-System.out.println(s.getValue()); // getValue() gets the "raw" value
-System.out.println(s.toString()); // toString() gets the string representation
+        ETPString s = (ETPString)tuple.getValue().get(3);
+        System.out.println(s.getValue()); // getValue() gets the "raw" value
+        System.out.println(s.toString()); // toString() gets the string representation
+        
+        // you can set values on the ETP structure and call toString() to render
+        // a new Erlang term
+        atom.setValue("new_atom_value");
+        list.getValue().add(new ETPInteger(100));
+        System.out.println(tuple.toString());
 ```
 
 yields the following output:
@@ -58,6 +64,7 @@ Atom = mylist
 my_string
 Hello world
 "Hello world"
+{new_atom_value,[1,2,3,4,100],my_string,"Hello world"}
 ```
 
 ### Status
