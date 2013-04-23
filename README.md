@@ -69,7 +69,7 @@ Hello world
 
 ### Status
 
-  Etp parses a Riak app.config file without breaking a sweat.
+  Comments and whitespace are lost during parse, however I should be able to reconstruct these with Antlr.
 
 ### Building
 
