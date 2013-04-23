@@ -34,8 +34,8 @@ ETPTuple tuple = (ETPTuple)ETP.parse(
 ETPAtom atom = (ETPAtom)tuple.getValue().get(0);
 System.out.println("Atom = " + atom);
 
-// use getValue() to access the list of terms
 ETPList list = (ETPList)tuple.getValue().get(1);
+// use getValue() to access the list of terms
 for(ETPTerm v : list.getValue()) {
 	System.out.println("  List item " + v);
 }
