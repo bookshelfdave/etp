@@ -4,7 +4,7 @@
     <groupId>com.metadave.etp</groupId>
     <artifactId>etp</artifactId>
     <packaging>jar</packaging>
-    <version>0.1</version>
+    <version>0.2</version>
     <name>ETP</name>
     <url>https://github.com/metadave/etp</url>
     <description>An Erlang term parser for Java</description>
