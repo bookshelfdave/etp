@@ -90,7 +90,14 @@ Call `toString()` on a `ETPTerm` object will render a valid Erlang term to a `St
 	Sontatype OSS
 	Retain comments + whitespace on a separate Antlr token stream
 	Pretty print
+
+### Contributing
+
+Fork this repo, create a branch with
+
+	git checkout -b your_branch_name
 	
+Submit a pull request when your code is ready for review.	
 ### License
 
 http://www.apache.org/licenses/LICENSE-2.0.html
