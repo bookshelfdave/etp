@@ -22,17 +22,22 @@
 package com.metadave.etp;
 
 import com.metadave.etp.rep.*;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ETPWalker  extends ETPBaseListener {
+public class ETPWalker extends ETPBaseListener {
     ParseTreeProperty<Object> values = new ParseTreeProperty<Object>();
 
+    CommonTokenStream tokens;
 
-    public ETPWalker() {
+    public ETPWalker(CommonTokenStream tokens) {
+        this.tokens = tokens;
     }
 
     public void setValue(ParseTree node, Object value) {
@@ -46,27 +51,27 @@ public class ETPWalker  extends ETPBaseListener {
 
     @Override
     public void exitEtp_term(ETPParser.Etp_termContext ctx) {
-        if(ctx.etp_atom() != null) {
+        if (ctx.etp_atom() != null) {
             setValue(ctx, getValue(ctx.etp_atom()));
-        } else if(ctx.etp_bool() != null) {
+        } else if (ctx.etp_bool() != null) {
             setValue(ctx, getValue(ctx.etp_bool()));
-        } else if(ctx.etp_float() != null) {
+        } else if (ctx.etp_float() != null) {
             setValue(ctx, getValue(ctx.etp_float()));
-        } else if(ctx.etp_int()  != null) {
+        } else if (ctx.etp_int() != null) {
             setValue(ctx, getValue(ctx.etp_int()));
-        } else if(ctx.etp_list()  != null) {
+        } else if (ctx.etp_list() != null) {
             setValue(ctx, getValue(ctx.etp_list()));
-        } else if(ctx.etp_string()  != null) {
+        } else if (ctx.etp_string() != null) {
             setValue(ctx, getValue(ctx.etp_string()));
-        } else if(ctx.etp_tuple() != null) {
+        } else if (ctx.etp_tuple() != null) {
             setValue(ctx, getValue(ctx.etp_tuple()));
-        } else if(ctx.etp_binary() != null) {
+        } else if (ctx.etp_binary() != null) {
             setValue(ctx, getValue(ctx.etp_binary()));
-        } else if(ctx.etp_pid() != null) {
+        } else if (ctx.etp_pid() != null) {
             setValue(ctx, getValue(ctx.etp_pid()));
-        } else if(ctx.etp_ref() != null) {
+        } else if (ctx.etp_ref() != null) {
             setValue(ctx, getValue(ctx.etp_ref()));
-        } else if(ctx.etp_fun() != null) {
+        } else if (ctx.etp_fun() != null) {
             setValue(ctx, getValue(ctx.etp_fun()));
         }
     }
@@ -80,7 +85,7 @@ public class ETPWalker  extends ETPBaseListener {
     @Override
     public void exitEtp_tuple(ETPParser.Etp_tupleContext ctx) {
         List<ETPTerm<?>> l = new ArrayList<ETPTerm<?>>();
-        for(ETPParser.Etp_termContext tc: ctx.tupleitems) {
+        for (ETPParser.Etp_termContext tc : ctx.tupleitems) {
             l.add((ETPTerm<?>) getValue(tc));
         }
         setValue(ctx, new ETPTuple(l));
@@ -88,12 +93,13 @@ public class ETPWalker  extends ETPBaseListener {
 
     @Override
     public void exitEtp_atom(ETPParser.Etp_atomContext ctx) {
-        if(ctx.ID() != null) {
+        if (ctx.ID() != null) {
             setValue(ctx, new ETPAtom(ctx.ID().getText()));
-        } else if(ctx.IDSTRING() != null) {
+        } else if (ctx.IDSTRING() != null) {
             setValue(ctx, new ETPQuotedAtom(stripQuotes(ctx.IDSTRING().getText())));
         }
     }
+
 
     @Override
     public void exitEtp_string(ETPParser.Etp_stringContext ctx) {
@@ -110,11 +116,10 @@ public class ETPWalker  extends ETPBaseListener {
     @Override
     public void exitEtp_list(ETPParser.Etp_listContext ctx) {
         List<ETPTerm<?>> l = new ArrayList<ETPTerm<?>>();
-        for(ETPParser.Etp_termContext tc: ctx.listitems) {
+        for (ETPParser.Etp_termContext tc : ctx.listitems) {
             l.add((ETPTerm<?>) getValue(tc));
         }
         setValue(ctx, new ETPList(l));
-
     }
 
     @Override
@@ -131,8 +136,8 @@ public class ETPWalker  extends ETPBaseListener {
             return rawVal.substring(1, 2);
         } else {
             String v = rawVal.substring(1, rawVal.length() - 1);
-            if(v.contains("\\\"")) {
-                v = v.replaceAll("\\\\\"","\"");
+            if (v.contains("\\\"")) {
+                v = v.replaceAll("\\\\\"", "\"");
             }
             return v;
         }
@@ -141,8 +146,8 @@ public class ETPWalker  extends ETPBaseListener {
     @Override
     public void exitEtp_binary(ETPParser.Etp_binaryContext ctx) {
         List<ETPBinary.ETPBinaryValue> segments = new ArrayList<ETPBinary.ETPBinaryValue>();
-        for(ETPParser.Etp_binary_itemContext segment : ctx.segments) {
-            ETPBinary.ETPBinaryValue s = (ETPBinary.ETPBinaryValue)getValue(segment);
+        for (ETPParser.Etp_binary_itemContext segment : ctx.segments) {
+            ETPBinary.ETPBinaryValue s = (ETPBinary.ETPBinaryValue) getValue(segment);
             segments.add(s);
         }
         ETPBinary b = new ETPBinary(segments);
@@ -152,16 +157,16 @@ public class ETPWalker  extends ETPBaseListener {
     @Override
     public void exitEtp_binary_item(ETPParser.Etp_binary_itemContext ctx) {
         ETPBinary.ETPBinaryValue<?> v = null;
-        if(ctx.val != null) {
-            if(ctx.size != null) {
-                 v = new ETPBinary.BinInt(
-                            Long.parseLong(ctx.val.getText()),
-                            Integer.parseInt(ctx.size.getText()));
+        if (ctx.val != null) {
+            if (ctx.size != null) {
+                v = new ETPBinary.BinInt(
+                        Long.parseLong(ctx.val.getText()),
+                        Integer.parseInt(ctx.size.getText()));
             } else {
                 v = new ETPBinary.BinInt(Long.parseLong(ctx.val.getText()));
             }
-        } else if(ctx.STRING() != null) {
-            if(ctx.size != null) {
+        } else if (ctx.STRING() != null) {
+            if (ctx.size != null) {
                 v = new ETPBinary.BinString(stripQuotes(ctx.STRING().getText()),
                         Integer.parseInt(ctx.size.getText()));
             } else {
@@ -185,6 +190,66 @@ public class ETPWalker  extends ETPBaseListener {
     public void exitEtp_fun(ETPParser.Etp_funContext ctx) {
         setValue(ctx, new ETPFun(ctx.getText()));
     }
+
+    public ETPTerm processHiddenChannels(ParserRuleContext ctx) {
+        Object o = getValue(ctx);
+        if (o != null) {
+            ETPTerm erlTerm = (ETPTerm) o;
+
+            List<Token> whiteLeft =
+                    tokens.getHiddenTokensToLeft(ctx.getStart().getTokenIndex(), ETPLexer.WHITESPACE);
+            List<Token> whiteRight =
+                    tokens.getHiddenTokensToRight(ctx.getStop().getTokenIndex(), ETPLexer.WHITESPACE);
+
+
+            List<Token> commentsLeft =
+                    tokens.getHiddenTokensToLeft(ctx.getStart().getTokenIndex(), ETPLexer.COMMENTS);
+            List<Token> commentsRight =
+                    tokens.getHiddenTokensToRight(ctx.getStop().getTokenIndex(), ETPLexer.COMMENTS);
+
+
+            if (whiteLeft != null) {
+                StringBuilder b = new StringBuilder();
+                for (Token t : whiteLeft) {
+                    b.append(t.getText());
+                }
+                //System.out.println("[[" + b.toString() + "[[");
+                erlTerm.setWhiteLeft(b.toString());
+            }
+
+            if (whiteRight != null) {
+                StringBuilder b = new StringBuilder();
+                for (Token t : whiteRight) {
+                    b.append(t.getText());
+                }
+                //System.out.println("]]" + b.toString() + "]]");
+                erlTerm.setWhiteRight(b.toString());
+            }
+
+            if (commentsLeft != null) {
+                StringBuilder b = new StringBuilder();
+                for (Token t : commentsLeft) {
+                    b.append(t.getText());
+                }
+                //System.out.println("cc" + b.toString() + "cc");
+                erlTerm.setCommentsLeft(b.toString());
+            }
+
+            if (commentsRight != null) {
+                StringBuilder b = new StringBuilder();
+                for (Token t : commentsRight) {
+                    b.append(t.getText());
+                }
+                //System.out.println("CC" + b.toString() + "CC");
+                erlTerm.setCommentsRight(b.toString());
+            }
+            return erlTerm;
+        } else {
+            return null;
+        }
+
+    }
+
 
     //    @Test
 //    public void testStripQuotes() {

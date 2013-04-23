@@ -28,11 +28,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TestETP {
 
     @Test
-    public void testString() {
+    public void testFailure() {
+        try {
+            ETP.parse("!!!!");
+            assertTrue("Fail", false);
+        } catch (Exception e) {
+            assertTrue("Pass", true);
+        }
+    }
+
+    @Test
+    public void testString() throws Exception {
         {
             ETPTerm<?> t = ETP.parse("\"hello\"");
             assertEquals("hello",t.getValue());
@@ -52,21 +63,21 @@ public class TestETP {
     }
 
     @Test
-    public void testInt() {
+    public void testInt() throws Exception  {
         ETPTerm<?> t = ETP.parse("100");
         assertEquals("100", t.toString());
         assertEquals(new ETPInteger(100).getValue(), t.getValue());
     }
 
     @Test
-    public void testFloat() {
+    public void testFloat() throws Exception  {
         ETPTerm<?> t = ETP.parse("3.14159265359");
         assertEquals("3.14159265359", t.toString());
         assertEquals(new ETPDouble(3.14159265359).getValue(), t.getValue());
     }
 
     @Test
-    public void testBoolean() {
+    public void testBoolean() throws Exception  {
         {
         ETPTerm<?> t = ETP.parse("true");
         assertEquals("true", t.toString());
@@ -81,7 +92,7 @@ public class TestETP {
     }
 
     @Test
-    public void testAtom() {
+    public void testAtom() throws Exception  {
         {
             ETPTerm<?> t = ETP.parse("helloworld");
             assertEquals("helloworld", t.toString());
@@ -99,7 +110,7 @@ public class TestETP {
     }
 
     @Test
-    public void testList() {
+    public void testList() throws Exception  {
         ETPTerm<?> t = ETP.parse("[1,2,3]");
         assertEquals("[1,2,3]", t.toString());
         List<ETPTerm<?>> v = new ArrayList<ETPTerm<?>>();
@@ -110,7 +121,7 @@ public class TestETP {
     }
 
     @Test
-    public void testTuple() {
+    public void testTuple() throws Exception  {
         ETPTerm<?> t = ETP.parse("{foo,bar,1}");
         assertEquals("{foo,bar,1}", t.toString());
         List<ETPTerm<?>> v = new ArrayList<ETPTerm<?>>();
@@ -121,7 +132,7 @@ public class TestETP {
     }
 
     @Test
-    public void testNesting() {
+    public void testNesting() throws Exception  {
         ETPTerm<?> t = ETP.parse("{foo,bar,[1,2,{a,b,c}]}");
         assertEquals("{foo,bar,[1,2,{a,b,c}]}", t.toString());
 
@@ -138,7 +149,7 @@ public class TestETP {
     }
 
     @Test
-    public void testBinaries() {
+    public void testBinaries() throws Exception  {
         {
             ETPTerm<?> t = ETP.parse("<<1,2,3>>");
             assertEquals("<<1,2,3>>", t.toString());
@@ -156,19 +167,19 @@ public class TestETP {
     }
 
     @Test
-    public void testPIDs() {
+    public void testPIDs() throws Exception  {
         ETPTerm<?> t = ETP.parse("<0.33.0>");
         assertEquals("<0.33.0>", t.toString());
     }
 
     @Test
-    public void testRef() {
+    public void testRef() throws Exception  {
         ETPTerm<?> t = ETP.parse("#Ref<0.0.0.32>");
         assertEquals("#Ref<0.0.0.32>", t.toString());
     }
 
     @Test
-    public void testFun() {
+    public void testFun() throws Exception  {
         ETPTerm<?> t = ETP.parse("#Fun<erl_eval.6.39074546>");
         assertEquals("#Fun<erl_eval.6.39074546>", t.toString());
     }

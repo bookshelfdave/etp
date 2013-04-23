@@ -108,6 +108,8 @@ public class ETPBinary extends ETPTerm<List<ETPBinary.ETPBinaryValue>> {
                 return value.toString();
             }
         }
+
+
     }
 
     public static class BinString extends ETPBinaryValue<String> {
@@ -123,5 +125,7 @@ public class ETPBinary extends ETPTerm<List<ETPBinary.ETPBinaryValue>> {
         public String toString() {
             return "\"" + value.toString() + "\"";
         }
+
+
     }
 }

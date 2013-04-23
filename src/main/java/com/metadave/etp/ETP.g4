@@ -21,6 +21,11 @@ grammar ETP;
  * -------------------------------------------------------------------
  */
 
+@lexer::members {
+    public static final int WHITESPACE = 1;
+    public static final int COMMENTS = 2;
+}
+
 
 etp_term:
     etp_atom
@@ -50,6 +55,7 @@ etp_binary: BINSTART (segments+=etp_binary_item (COMMA segments+=etp_binary_item
 etp_binary_item: val=INT (COLON size=INT)? | STRING;
 
 etp_ref:    HASH REF LESSTHAN REFID GREATERTHAN;
+
 
 FUN:           'Fun';
 REF:           'Ref';
@@ -91,7 +97,6 @@ fragment DIGIT  : '0' .. '9';
 STRING  :  '"' (ESC|.)*? '"';
 fragment ESC : '\\"' | '\\\\' ;
 
-LINE_COMMENT  : '%' .*? '\r'? '\n' -> skip ;
-//COMMENT       : '/*' .*? '*/'       -> skip ;
+LINE_COMMENT  : '%' .*? '\r'? '\n' -> channel(COMMENTS) ;
 
-WS      :       [ \t\r\n]+ -> skip;
+WS      :       [ \t\r\n]+ -> channel(WHITESPACE);
