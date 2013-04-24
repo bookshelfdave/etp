@@ -37,6 +37,11 @@ public class ETPList extends ETPTerm<List<ETPTerm<?>>>{
         this.value = ts;
     }
 
+    public ETPTerm getValue(int index) {
+        // TODO: check for valid index ranges
+        return value.get(index);
+    }
+
     @Override
     public String toString() {
         StringBuilder b = new StringBuilder();
