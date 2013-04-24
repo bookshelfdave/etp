@@ -29,23 +29,23 @@ An etp term is made up of any of these classes:
 
 ```
 ETPTuple tuple = (ETPTuple)ETP.parse(
-                "{mylist, [1,2,3,4], \n" +
-                 "my_string, \"Hello world\"}");
-ETPAtom atom = (ETPAtom)tuple.getValue().get(0);
+                   "{mylist, [1,2,3,4], \n" +
+                        "my_string, \"Hello world\"}");
+ETPAtom atom = (ETPAtom)tuple.getValue(0);
 System.out.println("Atom = " + atom);
 
-ETPList list = (ETPList)tuple.getValue().get(1);
+ETPList list = (ETPList)tuple.getValue(1);
 // use getValue() to access the list of terms
 for(ETPTerm v : list.getValue()) {
-	System.out.println("  List item " + v);
+    System.out.println("  List item " + v);
 }
-ETPAtom my_string_atom = (ETPAtom)tuple.getValue().get(2);
+ETPAtom my_string_atom = (ETPAtom)tuple.getValue(2);
 System.out.println(my_string_atom);
 
-ETPString s = (ETPString)tuple.getValue().get(3);
+ETPString s = (ETPString)tuple.getValue(3);
 System.out.println(s.getValue()); // getValue() gets the "raw" value
 System.out.println(s.toString()); // toString() gets the string representation
-        
+
 // you can set values on the ETP structure and call toString() to render
 // a new Erlang term
 atom.setValue("new_atom_value");
