@@ -28,9 +28,10 @@ An etp term is made up of any of these classes:
 ### Example
 
 ```
-ETPTuple tuple = (ETPTuple)ETP.parse(
-                   "{mylist, [1,2,3,4], \n" +
-                        "my_string, \"Hello world\"}");
+// at the moment, whitespace and comments between terms aren't retained
+ETPTuple tuple = (ETPTuple)ETP.parse("{mylist, [1,2,3,4], \n" +
+                                      "my_string, \"Hello world\"}");
+                                      
 ETPAtom atom = (ETPAtom)tuple.getValue(0);
 System.out.println("Atom = " + atom);
 
