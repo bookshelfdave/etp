@@ -1,6 +1,13 @@
 ## ETP: An Erlang Term Parser for Java. 
 
-Given a String of Erlang terms, ETP will parse the string into a tree of ETP Java objects.
+Given a String of Erlang terms, ETP will parse the string into a tree of ETP Java objects. Calling toString() on an ETP object will render a tree as an Erlang term.
+
+### Building
+
+You'll need Maven to build etp.
+
+	mvn package
+
 
 ### Usage
 
@@ -8,7 +15,7 @@ Given a String of Erlang terms, ETP will parse the string into a tree of ETP Jav
 
 	EPTTerm com.metadave.etp.ETP.parse(InputStream is)
 
-An etp term is made up of any of these classes:
+An ETP term is made up of any of these classes:
 
 - ETPTerm (abstract)	
 - ETPAtom
@@ -25,9 +32,15 @@ An etp term is made up of any of these classes:
 - ETPTerm
 - ETPTuple
 
+### Rendering
+
+Call `toString()` on a `ETPTerm` object will render a valid Erlang term to a `String`.
+
+
 ### Grammar
 
 Antlr 4 grammar [here](https://github.com/metadave/etp/blob/master/src/main/java/com/metadave/etp/ETP.g4)
+
 
 ### Example
 
@@ -76,23 +89,12 @@ Hello world
 
   Comments and whitespace are lost during parse, however I should be able to reconstruct these with Antlr.
 
-### Building
-
-You'll need Maven to build etp.
-
-	mvn package
-
-
-### Rendering
-
-Call `toString()` on a `ETPTerm` object will render a valid Erlang term to a `String`.
-
 
 ### TODO
 
 	$\n
 	2#101
-	Sontatype OSS
+	Sontatype OSS - work in progress
 	Retain comments + whitespace on a separate Antlr token stream
 	Pretty print
 
