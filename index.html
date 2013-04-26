@@ -60,7 +60,11 @@ EPTTerm com.metadave.etp.ETP.parse(InputStream is)
 <li>ETPString</li>
 <li>ETPTerm</li>
 <li>ETPTuple</li>
-</ul><h3>Example</h3>
+</ul><h3>Grammar</h3>
+
+<p>Antlr 4 grammar <a href="https://github.com/metadave/etp/blob/master/src/main/java/com/metadave/etp/ETP.g4">here</a></p>
+
+<h3>Example</h3>
 
 <pre><code>// at the moment, whitespace and comments between terms aren't retained
 ETPTuple tuple = (ETPTuple)ETP.parse("{mylist, [1,2,3,4], \n" +
