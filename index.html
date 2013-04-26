@@ -33,7 +33,14 @@
       <section id="main_content" class="inner">
         <h2>ETP: An Erlang Term Parser for Java.</h2>
 
-<p>Given a String of Erlang terms, ETP will parse the string into a tree of ETP Java objects.</p>
+<p>Given a String of Erlang terms, ETP will parse the string into a tree of ETP Java objects. Calling toString() on an ETP object will render a tree as an Erlang term.</p>
+
+<h3>Building</h3>
+
+<p>You'll need Maven to build etp.</p>
+
+<pre><code>mvn package
+</code></pre>
 
 <h3>Usage</h3>
 
@@ -42,7 +49,7 @@
 EPTTerm com.metadave.etp.ETP.parse(InputStream is)
 </code></pre>
 
-<p>An etp term is made up of any of these classes:</p>
+<p>An ETP term is made up of any of these classes:</p>
 
 <ul>
 <li>ETPTerm (abstract)<br>
@@ -60,7 +67,11 @@ EPTTerm com.metadave.etp.ETP.parse(InputStream is)
 <li>ETPString</li>
 <li>ETPTerm</li>
 <li>ETPTuple</li>
-</ul><h3>Grammar</h3>
+</ul><h3>Rendering</h3>
+
+<p>Call <code>toString()</code> on a <code>ETPTerm</code> object will render a valid Erlang term to a <code>String</code>.</p>
+
+<h3>Grammar</h3>
 
 <p>Antlr 4 grammar <a href="https://github.com/metadave/etp/blob/master/src/main/java/com/metadave/etp/ETP.g4">here</a></p>
 
@@ -109,22 +120,11 @@ Hello world
 
 <p>Comments and whitespace are lost during parse, however I should be able to reconstruct these with Antlr.</p>
 
-<h3>Building</h3>
-
-<p>You'll need Maven to build etp.</p>
-
-<pre><code>mvn package
-</code></pre>
-
-<h3>Rendering</h3>
-
-<p>Call <code>toString()</code> on a <code>ETPTerm</code> object will render a valid Erlang term to a <code>String</code>.</p>
-
 <h3>TODO</h3>
 
 <pre><code>$\n
 2#101
-Sontatype OSS
+Sontatype OSS - work in progress
 Retain comments + whitespace on a separate Antlr token stream
 Pretty print
 </code></pre>
