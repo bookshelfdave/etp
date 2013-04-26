@@ -8,6 +8,11 @@
     <name>ETP</name>
     <description>An Erlang term parser for Java</description>
     <url>https://github.com/metadave/etp</url>
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
