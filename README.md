@@ -25,6 +25,10 @@ An etp term is made up of any of these classes:
 - ETPTerm
 - ETPTuple
 
+### Grammar
+
+Antlr 4 grammar [here](https://github.com/metadave/etp/blob/master/src/main/java/com/metadave/etp/ETP.g4)
+
 ### Example
 
 ```
