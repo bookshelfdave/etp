@@ -95,7 +95,7 @@ Hello world
 	$\n
 	2#101
 	Sontatype OSS - work in progress
-	Retain comments + whitespace on a separate Antlr token stream
+	Retain comments + whitespace on a separate Antlr token stream? Not sure if I'm going to bother.
 	Pretty print
 
 ### Contributing
