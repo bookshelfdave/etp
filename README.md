@@ -85,18 +85,13 @@ Hello world
 {new_atom_value,[1,2,3,4,100],my_string,"Hello world"}
 ```
 
-### Status
+### Status & TODO
 
-  Comments and whitespace are lost during parse, however I should be able to reconstruct these with Antlr.
+- Comments and whitespace are lost during parse. Not sure if I'm going to bother.
+- $\n
+- 2#101
+- Sontatype OSS Maven Artifact - work in progress
 
-
-### TODO
-
-	$\n
-	2#101
-	Sontatype OSS - work in progress
-	Retain comments + whitespace on a separate Antlr token stream? Not sure if I'm going to bother.
-	Pretty print
 
 ### Contributing
 
