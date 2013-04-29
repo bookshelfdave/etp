@@ -29,7 +29,7 @@ Also, ETP is available via the [Sonatype OSS repository](https://oss.sonatype.or
 
 An ETP term is made up of any of these classes:
 
-- ETPTerm (abstract)	
+- ETPTerm (abstract base class for all other ETP objects)	
 - ETPAtom
 - ETPQuotedAtom
 - ETPBinary
