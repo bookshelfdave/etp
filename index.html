@@ -61,7 +61,7 @@ EPTTerm com.metadave.etp.ETP.parse(InputStream is)
 <p>An ETP term is made up of any of these classes:</p>
 
 <ul>
-<li>ETPTerm (abstract)<br>
+<li>ETPTerm (abstract base class for all other ETP objects)<br>
 </li>
 <li>ETPAtom</li>
 <li>ETPQuotedAtom</li>
@@ -78,7 +78,7 @@ EPTTerm com.metadave.etp.ETP.parse(InputStream is)
 <li>ETPTuple</li>
 </ul><h3>Rendering</h3>
 
-<p>Call <code>toString()</code> on a <code>ETPTerm</code> object will render a valid Erlang term to a <code>String</code>.</p>
+<p>Call <code>toString()</code> on a <code>ETPTerm</code> object will render a valid Erlang term to a <code>String</code>. <em>Note</em> - at the moment, ETP doesn't prevent you from validating <strong>bad</strong> Erlang terms. Validation coming soon.</p>
 
 <h3>Grammar</h3>
 
@@ -89,6 +89,8 @@ EPTTerm com.metadave.etp.ETP.parse(InputStream is)
 <pre><code>// at the moment, whitespace and comments between terms aren't retained
 ETPTuple tuple = (ETPTuple)ETP.parse("{mylist, [1,2,3,4], \n" +
                                       "my_string, \"Hello world\"}");
+// All ETP objects subclass ETPTerm
+// you can use "instanceof" to see what the result of the parse is
 
 ETPAtom atom = (ETPAtom)tuple.getValue(0);
 System.out.println("Atom = " + atom);
@@ -129,6 +131,7 @@ Hello world
 
 <ul>
 <li>Javadocs, better documentation</li>
+<li>Term validation during setValue() to prevent bad terms from being rendered to a String.</li>
 <li>Comments and whitespace are lost during parse. Not sure if I'm going to bother.</li>
 <li>$\n</li>
 <li>2#101</li>
