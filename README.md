@@ -8,6 +8,18 @@ You'll need Maven to build etp.
 
 	mvn package
 
+Also, the dependency can be included in your pom.xml (WIP 4/29/2013):
+
+```
+<dependency>
+  <groupId>com.github.metadave</groupId>
+  <artifactId>etp</artifactId>
+  <version>0.3</version>
+</dependency>
+```
+
+
+
 
 ### Usage
 
@@ -31,6 +43,7 @@ An ETP term is made up of any of these classes:
 - ETPString
 - ETPTerm
 - ETPTuple
+
 
 ### Rendering
 
