@@ -8,7 +8,7 @@ You'll need Maven to build etp.
 
 	mvn package
 
-Also, the dependency can be included in your pom.xml (WIP 4/29/2013):
+Also, ETP is available via the [Sonatype OSS repository](https://oss.sonatype.org/index.html#nexus-search;quick~metadave):
 
 ```
 <dependency>
@@ -99,11 +99,11 @@ Hello world
 ```
 
 ### Status & TODO
-
+- Javadocs, better documentation
 - Comments and whitespace are lost during parse. Not sure if I'm going to bother.
 - $\n
 - 2#101
-- Sontatype OSS Maven Artifact - work in progress
+
 
 
 ### Contributing
