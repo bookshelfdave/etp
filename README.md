@@ -47,7 +47,7 @@ An ETP term is made up of any of these classes:
 
 ### Rendering
 
-Call `toString()` on a `ETPTerm` object will render a valid Erlang term to a `String`.
+Call `toString()` on a `ETPTerm` object will render a valid Erlang term to a `String`. *Note* - at the moment, ETP doesn't prevent you from validating **bad** Erlang terms. Validation coming soon.
 
 
 ### Grammar
@@ -61,7 +61,9 @@ Antlr 4 grammar [here](https://github.com/metadave/etp/blob/master/src/main/java
 // at the moment, whitespace and comments between terms aren't retained
 ETPTuple tuple = (ETPTuple)ETP.parse("{mylist, [1,2,3,4], \n" +
                                       "my_string, \"Hello world\"}");
-                                      
+// All ETP objects subclass ETPTerm
+// you can use "instanceof" to see what the result of the parse is
+
 ETPAtom atom = (ETPAtom)tuple.getValue(0);
 System.out.println("Atom = " + atom);
 
@@ -100,10 +102,10 @@ Hello world
 
 ### Status & TODO
 - Javadocs, better documentation
+- Term validation during setValue() to prevent bad terms from being rendered to a String.
 - Comments and whitespace are lost during parse. Not sure if I'm going to bother.
 - $\n
 - 2#101
-
 
 
 ### Contributing
