@@ -39,6 +39,11 @@ public class ETPBinary extends ETPTerm<List<ETPBinary.ETPBinaryValue>> {
         this.value = vs;
     }
 
+    public ETPTerm getValue(int index) {
+        // TODO: check for valid index ranges
+        return value.get(index);
+    }
+
     @Override
     public String toString() {
         StringBuilder b = new StringBuilder();
@@ -57,10 +62,8 @@ public class ETPBinary extends ETPTerm<List<ETPBinary.ETPBinaryValue>> {
         return b.toString();
     }
 
-    public static abstract class ETPBinaryValue<V> {
+    public static abstract class ETPBinaryValue<V> extends ETPTerm<V> {
         private Integer size = null;
-        protected V value;
-
 
         protected ETPBinaryValue(V value) {
             this.value = value;
@@ -82,13 +85,6 @@ public class ETPBinary extends ETPTerm<List<ETPBinary.ETPBinaryValue>> {
             this.size = size;
         }
 
-        public V getValue() {
-            return value;
-        }
-
-        public void setValue(V value) {
-            this.value = value;
-        }
     }
 
     public static class BinInt extends ETPBinaryValue<Long> {
