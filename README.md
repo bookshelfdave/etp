@@ -14,7 +14,7 @@ Also, ETP is available via the [Sonatype OSS repository](https://oss.sonatype.or
 <dependency>
   <groupId>com.github.metadave</groupId>
   <artifactId>etp</artifactId>
-  <version>0.3</version>
+  <version>0.4</version>
 </dependency>
 ```
 
