@@ -36,7 +36,7 @@ An ETP term is made up of any of these classes:
 - ETPBoolean
 - ETPDouble
 - ETPFun
-- ETPInteger
+- ETPLong
 - ETPList
 - ETPPid
 - ETPRef
@@ -82,7 +82,7 @@ System.out.println(s.toString()); // toString() gets the string representation
 // you can set values on the ETP structure and call toString() to render
 // a new Erlang term
 atom.setValue("new_atom_value");
-list.getValue().add(new ETPInteger(100));
+list.getValue().add(new ETPLong(100));
 System.out.println(tuple.toString());
 ```
 
