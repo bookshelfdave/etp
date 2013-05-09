@@ -21,6 +21,8 @@
 
 package com.metadave.etp.rep;
 
+import com.ericsson.otp.erlang.OtpErlangObject;
+
 public abstract class ETPTerm<T> {
     protected T value;
 
@@ -32,6 +34,8 @@ public abstract class ETPTerm<T> {
     public ETPTerm() {
 
     }
+
+    public abstract OtpErlangObject getOTP();
 
     public ETPTerm(T value) {
         this.value = value;

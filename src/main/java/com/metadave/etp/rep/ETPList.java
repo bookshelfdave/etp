@@ -21,11 +21,14 @@
 
 package com.metadave.etp.rep;
 
+import com.ericsson.otp.erlang.OtpErlangList;
+import com.ericsson.otp.erlang.OtpErlangObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ETPList extends ETPTerm<List<ETPTerm<?>>>{
-    public ETPList(List value) {
+    public ETPList(List<ETPTerm<?>> value) {
         super(value);
     }
 
@@ -61,4 +64,13 @@ public class ETPList extends ETPTerm<List<ETPTerm<?>>>{
         return b.toString();
     }
 
+
+    @Override
+    public OtpErlangObject getOTP() {
+        OtpErlangObject[] children = new OtpErlangObject[this.getValue().size()];
+        for(int i = 0; i < this.getValue().size(); i++) {
+            children[i] = this.getValue().get(i).getOTP();
+        }
+        return new OtpErlangList(children);
+    }
 }

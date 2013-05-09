@@ -125,7 +125,7 @@ public class ETPWalker extends ETPBaseListener {
     @Override
     public void exitEtp_int(ETPParser.Etp_intContext ctx) {
         String v = ctx.getText();
-        setValue(ctx, new ETPInteger(Integer.parseInt(v)));
+        setValue(ctx, new ETPLong(Long.parseLong(v)));
     }
 
     public static String stripQuotes(String rawVal) {

@@ -22,8 +22,21 @@
 package com.metadave.etp.rep;
 
 
-public class ETPInteger extends ETPTerm<Integer> {
-    public ETPInteger(Integer value) {
+import com.ericsson.otp.erlang.OtpErlangLong;
+import com.ericsson.otp.erlang.OtpErlangObject;
+
+// TODO: Change Integer to Long
+public class ETPLong extends ETPTerm<Long> {
+    public ETPLong(Long value) {
         super(value);
+    }
+
+    public ETPLong(Integer value) {
+        super(value.longValue());
+    }
+
+    @Override
+    public OtpErlangObject getOTP() {
+        return new OtpErlangLong(this.getValue());
     }
 }

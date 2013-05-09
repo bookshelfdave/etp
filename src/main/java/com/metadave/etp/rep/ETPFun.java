@@ -21,9 +21,15 @@
 
 package com.metadave.etp.rep;
 
+import com.ericsson.otp.erlang.OtpErlangObject;
+
 public class ETPFun extends ETPTerm<String> {
     public ETPFun(String value) {
         super(value);
     }
 
+    @Override
+    public OtpErlangObject getOTP() {
+        return null;
+    }
 }

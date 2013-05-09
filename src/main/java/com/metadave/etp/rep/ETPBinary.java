@@ -20,7 +20,7 @@
  */
 
 package com.metadave.etp.rep;
-
+import com.ericsson.otp.erlang.OtpErlangObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +62,11 @@ public class ETPBinary extends ETPTerm<List<ETPBinary.ETPBinaryValue>> {
         return b.toString();
     }
 
+    @Override
+    public OtpErlangObject getOTP() {
+        return null;
+    }
+
     public static abstract class ETPBinaryValue<V> extends ETPTerm<V> {
         private Integer size = null;
 
@@ -70,7 +75,7 @@ public class ETPBinary extends ETPTerm<List<ETPBinary.ETPBinaryValue>> {
         }
 
         protected ETPBinaryValue(V value, int size) {
-            this.size = new Integer(size);
+            this.size = size;
             this.value = value;
         }
 
@@ -105,7 +110,10 @@ public class ETPBinary extends ETPTerm<List<ETPBinary.ETPBinaryValue>> {
             }
         }
 
-
+        @Override
+        public OtpErlangObject getOTP() {
+            return null;
+        }
     }
 
     public static class BinString extends ETPBinaryValue<String> {
@@ -119,9 +127,12 @@ public class ETPBinary extends ETPTerm<List<ETPBinary.ETPBinaryValue>> {
 
         @Override
         public String toString() {
-            return "\"" + value.toString() + "\"";
+            return "\"" + value + "\"";
         }
 
-
+        @Override
+        public OtpErlangObject getOTP() {
+            return null;
+        }
     }
 }

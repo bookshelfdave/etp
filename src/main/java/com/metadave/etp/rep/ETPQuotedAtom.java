@@ -31,4 +31,5 @@ public class ETPQuotedAtom extends ETPAtom {
     public String toString() {
         return "'" + value + "'";
     }
+
 }

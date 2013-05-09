@@ -66,7 +66,7 @@ public class TestETP {
     public void testInt() throws Exception  {
         ETPTerm<?> t = ETP.parse("100");
         assertEquals("100", t.toString());
-        assertEquals(new ETPInteger(100).getValue(), t.getValue());
+        assertEquals(new ETPLong(100).getValue(), t.getValue());
     }
 
     @Test
@@ -114,9 +114,9 @@ public class TestETP {
         ETPTerm<?> t = ETP.parse("[1,2,3]");
         assertEquals("[1,2,3]", t.toString());
         List<ETPTerm<?>> v = new ArrayList<ETPTerm<?>>();
-        v.add(new ETPInteger(1));
-        v.add(new ETPInteger(2));
-        v.add(new ETPInteger(3));
+        v.add(new ETPLong(1));
+        v.add(new ETPLong(2));
+        v.add(new ETPLong(3));
         assertEquals(new ETPList(v).getValue().toString(), t.getValue().toString());
     }
 
@@ -127,7 +127,7 @@ public class TestETP {
         List<ETPTerm<?>> v = new ArrayList<ETPTerm<?>>();
         v.add(new ETPAtom("foo"));
         v.add(new ETPAtom("bar"));
-        v.add(new ETPInteger(1));
+        v.add(new ETPLong(1));
         assertEquals(new ETPList(v).getValue().toString(), t.getValue().toString());
     }
 
@@ -140,8 +140,8 @@ public class TestETP {
             new ETPAtom("foo"),
             new ETPAtom("bar"),
             new ETPList(
-                    new ETPInteger(1),
-                    new ETPInteger(2),
+                    new ETPLong(1),
+                    new ETPLong(2),
                     new ETPTuple(new ETPAtom("a"), new ETPAtom("b"), new ETPAtom("c"))
             )
         );

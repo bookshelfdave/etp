@@ -22,8 +22,16 @@
 package com.metadave.etp.rep;
 
 
+import com.ericsson.otp.erlang.OtpErlangAtom;
+import com.ericsson.otp.erlang.OtpErlangObject;
+
 public class ETPAtom extends ETPTerm<String> {
     public ETPAtom(String value) {
         super(value);
+    }
+
+    @Override
+    public OtpErlangObject getOTP() {
+        return new OtpErlangAtom(this.getValue());
     }
 }
