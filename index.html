@@ -69,7 +69,7 @@ EPTTerm com.metadave.etp.ETP.parse(InputStream is)
 <li>ETPBoolean</li>
 <li>ETPDouble</li>
 <li>ETPFun</li>
-<li>ETPInteger</li>
+<li>ETPLong</li>
 <li>ETPList</li>
 <li>ETPPid</li>
 <li>ETPRef</li>
@@ -110,7 +110,7 @@ System.out.println(s.toString()); // toString() gets the string representation
 // you can set values on the ETP structure and call toString() to render
 // a new Erlang term
 atom.setValue("new_atom_value");
-list.getValue().add(new ETPInteger(100));
+list.getValue().add(new ETPLong(100));
 System.out.println(tuple.toString());
 </code></pre>
 
