@@ -31,11 +31,13 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h2>ETP: An Erlang Term Parser for Java.</h2>
+        <h2>
+<a name="etp-an-erlang-term-parser-for-java" class="anchor" href="#etp-an-erlang-term-parser-for-java"><span class="octicon octicon-link"></span></a>ETP: An Erlang Term Parser for Java.</h2>
 
 <p>Given a String of Erlang terms, ETP will parse the string into a tree of ETP Java objects. Calling toString() on an ETP object will render a tree as an Erlang term.</p>
 
-<h3>Building</h3>
+<h3>
+<a name="building" class="anchor" href="#building"><span class="octicon octicon-link"></span></a>Building</h3>
 
 <p>You'll need Maven to build etp.</p>
 
@@ -51,7 +53,8 @@
 &lt;/dependency&gt;
 </code></pre>
 
-<h3>Usage</h3>
+<h3>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h3>
 
 <pre><code>EPTTerm com.metadave.etp.ETP.parse(String s)
 
@@ -76,15 +79,19 @@ EPTTerm com.metadave.etp.ETP.parse(InputStream is)
 <li>ETPString</li>
 <li>ETPTerm</li>
 <li>ETPTuple</li>
-</ul><h3>Rendering</h3>
+</ul><h3>
+<a name="rendering" class="anchor" href="#rendering"><span class="octicon octicon-link"></span></a>Rendering</h3>
 
-<p>Call <code>toString()</code> on a <code>ETPTerm</code> object will render a valid Erlang term to a <code>String</code>. <em>Note</em> - at the moment, ETP doesn't prevent you from validating <strong>bad</strong> Erlang terms. Validation coming soon.</p>
+<p>Call <code>toString()</code> on a <code>ETPTerm</code> object will render a valid Erlang term to a <code>String</code>. <em>Note</em> - at the moment, 
+ETP doesn't prevent you setting invalid values on an ETPTerm object. Validation coming soon.</p>
 
-<h3>Grammar</h3>
+<h3>
+<a name="grammar" class="anchor" href="#grammar"><span class="octicon octicon-link"></span></a>Grammar</h3>
 
 <p>Antlr 4 grammar <a href="https://github.com/metadave/etp/blob/master/src/main/java/com/metadave/etp/ETP.g4">here</a></p>
 
-<h3>Example</h3>
+<h3>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h3>
 
 <pre><code>// at the moment, whitespace and comments between terms aren't retained
 ETPTuple tuple = (ETPTuple)ETP.parse("{mylist, [1,2,3,4], \n" +
@@ -127,7 +134,8 @@ Hello world
 {new_atom_value,[1,2,3,4,100],my_string,"Hello world"}
 </code></pre>
 
-<h3>Status &amp; TODO</h3>
+<h3>
+<a name="status--todo" class="anchor" href="#status--todo"><span class="octicon octicon-link"></span></a>Status &amp; TODO</h3>
 
 <ul>
 <li>Javadocs, better documentation</li>
@@ -135,7 +143,8 @@ Hello world
 <li>Comments and whitespace are lost during parse. Not sure if I'm going to bother.</li>
 <li>$\n</li>
 <li>2#101</li>
-</ul><h3>Contributing</h3>
+</ul><h3>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h3>
 
 <p>Fork this repo, create a branch with</p>
 
@@ -144,7 +153,8 @@ Hello world
 
 <p>Submit a pull request when your code is ready for review.   </p>
 
-<h3>License</h3>
+<h3>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h3>
 
 <p><a href="http://www.apache.org/licenses/LICENSE-2.0.html">http://www.apache.org/licenses/LICENSE-2.0.html</a></p>
 
