@@ -47,7 +47,8 @@ An ETP term is made up of any of these classes:
 
 ### Rendering
 
-Call `toString()` on a `ETPTerm` object will render a valid Erlang term to a `String`. *Note* - at the moment, ETP doesn't prevent you from building **bad** Erlang terms. Validation coming soon.
+Call `toString()` on a `ETPTerm` object will render a valid Erlang term to a `String`. *Note* - at the moment, 
+ETP doesn't prevent you setting invalid values on an ETPTerm object. Validation coming soon.
 
 
 ### Grammar
