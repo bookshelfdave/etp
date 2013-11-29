@@ -105,6 +105,7 @@ Hello world
 - Javadocs, better documentation
 - Term validation during setValue() to prevent bad terms from being rendered to a String.
 - Comments and whitespace are lost during parse. Not sure if I'm going to bother.
+- binding parse results to an object model
 - $\n
 - 2#101
 
