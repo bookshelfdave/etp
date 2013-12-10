@@ -81,9 +81,9 @@ IDSTRING  :  '\'' (IDESC|.)*? '\'';
 
 fragment IDESC : '\\\'' | '\\\\' ;
 
-INT         :   DIGIT+;
-FLOAT       :   DIGIT+ DOT DIGIT*
-               | DOT DIGIT+
+INT         :   ('-')? DIGIT+;
+FLOAT       :   ('-')? DIGIT+ DOT DIGIT*
+               | ('-')?DOT DIGIT+
             ;
 
 PID       :   DIGIT+ DOT DIGIT+ DOT DIGIT+;

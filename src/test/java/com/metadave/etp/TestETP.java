@@ -70,11 +70,27 @@ public class TestETP {
     }
 
     @Test
+    public void testNegativeInt() throws Exception  {
+        ETPTerm<?> t = ETP.parse("-100");
+        assertEquals("-100", t.toString());
+        assertEquals(new ETPLong(-100).getValue(), t.getValue());
+    }
+
+
+    @Test
     public void testFloat() throws Exception  {
         ETPTerm<?> t = ETP.parse("3.14159265359");
         assertEquals("3.14159265359", t.toString());
         assertEquals(new ETPDouble(3.14159265359).getValue(), t.getValue());
     }
+
+    @Test
+    public void testNegativeFloat() throws Exception  {
+        ETPTerm<?> t = ETP.parse("-3.14159265359");
+        assertEquals("-3.14159265359", t.toString());
+        assertEquals(new ETPDouble(-3.14159265359).getValue(), t.getValue());
+    }
+
 
     @Test
     public void testBoolean() throws Exception  {
