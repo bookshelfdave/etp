@@ -35,6 +35,7 @@ public class TestETP {
     @Test
     public void testFailure() {
         try {
+            System.out.println("Please ignore test output below!");
             ETP.parse("!!!!");
             assertTrue("Fail", false);
         } catch (Exception e) {
@@ -76,7 +77,6 @@ public class TestETP {
         assertEquals(new ETPLong(-100).getValue(), t.getValue());
     }
 
-
     @Test
     public void testFloat() throws Exception  {
         ETPTerm<?> t = ETP.parse("3.14159265359");
@@ -90,7 +90,6 @@ public class TestETP {
         assertEquals("-3.14159265359", t.toString());
         assertEquals(new ETPDouble(-3.14159265359).getValue(), t.getValue());
     }
-
 
     @Test
     public void testBoolean() throws Exception  {
@@ -121,8 +120,6 @@ public class TestETP {
             assertEquals("'helloworld@this is a special atom'", t.toString());
             assertEquals(new ETPQuotedAtom("helloworld@this is a special atom").getValue(), t.getValue());
         }
-
-
     }
 
     @Test
