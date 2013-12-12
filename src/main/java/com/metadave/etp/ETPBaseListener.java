@@ -13,11 +13,14 @@ public class ETPBaseListener implements ETPListener {
 	@Override public void enterEtp_pid(ETPParser.Etp_pidContext ctx) { }
 	@Override public void exitEtp_pid(ETPParser.Etp_pidContext ctx) { }
 
-	@Override public void enterEtp_tuple(ETPParser.Etp_tupleContext ctx) { }
-	@Override public void exitEtp_tuple(ETPParser.Etp_tupleContext ctx) { }
+	@Override public void enterEtp_terms(ETPParser.Etp_termsContext ctx) { }
+	@Override public void exitEtp_terms(ETPParser.Etp_termsContext ctx) { }
 
 	@Override public void enterEtp_binary_item(ETPParser.Etp_binary_itemContext ctx) { }
 	@Override public void exitEtp_binary_item(ETPParser.Etp_binary_itemContext ctx) { }
+
+	@Override public void enterEtp_tuple(ETPParser.Etp_tupleContext ctx) { }
+	@Override public void exitEtp_tuple(ETPParser.Etp_tupleContext ctx) { }
 
 	@Override public void enterEtp_string(ETPParser.Etp_stringContext ctx) { }
 	@Override public void exitEtp_string(ETPParser.Etp_stringContext ctx) { }

@@ -48,6 +48,14 @@ public class ETPWalker extends ETPBaseListener {
         return values.get(node);
     }
 
+    @Override
+    public void exitEtp_terms(ETPParser.Etp_termsContext ctx) {
+        List<ETPTerm> terms = new ArrayList<ETPTerm>();
+        for(ETPParser.Etp_termContext tc : ctx.etp_term()) {
+            terms.add((ETPTerm)getValue(tc));
+        }
+        setValue(ctx, terms);
+    }
 
     @Override
     public void exitEtp_term(ETPParser.Etp_termContext ctx) {

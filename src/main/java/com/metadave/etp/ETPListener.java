@@ -10,11 +10,14 @@ public interface ETPListener extends ParseTreeListener {
 	void enterEtp_pid(ETPParser.Etp_pidContext ctx);
 	void exitEtp_pid(ETPParser.Etp_pidContext ctx);
 
-	void enterEtp_tuple(ETPParser.Etp_tupleContext ctx);
-	void exitEtp_tuple(ETPParser.Etp_tupleContext ctx);
+	void enterEtp_terms(ETPParser.Etp_termsContext ctx);
+	void exitEtp_terms(ETPParser.Etp_termsContext ctx);
 
 	void enterEtp_binary_item(ETPParser.Etp_binary_itemContext ctx);
 	void exitEtp_binary_item(ETPParser.Etp_binary_itemContext ctx);
+
+	void enterEtp_tuple(ETPParser.Etp_tupleContext ctx);
+	void exitEtp_tuple(ETPParser.Etp_tupleContext ctx);
 
 	void enterEtp_string(ETPParser.Etp_stringContext ctx);
 	void exitEtp_string(ETPParser.Etp_stringContext ctx);

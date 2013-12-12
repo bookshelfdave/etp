@@ -26,6 +26,8 @@ grammar ETP;
     public static final int COMMENTS = 2;
 }
 
+etp_terms:
+    (etp_term DOT)+;
 
 etp_term:
     etp_atom

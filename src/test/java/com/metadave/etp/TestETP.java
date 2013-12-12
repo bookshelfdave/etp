@@ -198,4 +198,15 @@ public class TestETP {
     }
 
 
+    @Test
+    public void testStringMulti() throws Exception {
+        {
+            List<ETPTerm> t = ETP.parseMulti("a .\n b .");
+        }
+        {
+            List<ETPTerm> t = ETP.parseMulti("{a,b}. {c,1,[a,b]}.");
+            System.out.println(t);
+        }
+    }
+
 }

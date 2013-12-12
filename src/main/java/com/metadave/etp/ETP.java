@@ -30,6 +30,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 public class ETP {
     public static ETPTerm parse(String s) throws ParseException {
@@ -73,6 +74,52 @@ public class ETP {
         }
         term = (ETPTerm<?>)ew.getValue(t);
         return term;
+    }
+
+
+    public static List<ETPTerm> parseMulti(String s) throws ParseException {
+        ANTLRInputStream input = new ANTLRInputStream(s);
+        ETPLexer lexer = new ETPLexer(input);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        ETPParser parser = new ETPParser(tokens);
+        parser.removeErrorListeners();
+        parser.addErrorListener(new ETPErrorListener());
+        ETPWalker ew = new ETPWalker(tokens);
+        ParseTreeWalker walker = new ParseTreeWalker();
+        List<ETPTerm> terms = null;
+
+        ETPParser.Etp_termsContext t = null;
+        try {
+            t = parser.etp_terms();
+            walker.walk(ew, t);
+        } catch (Throwable e) {
+            throw new ParseException("ETP parse error", e);
+        }
+        terms = (List<ETPTerm>)ew.getValue(t);
+        return terms;
+    }
+
+
+    public static List<ETPTerm> parseMulti(InputStream is) throws IOException, ParseException {
+        ANTLRInputStream input = new ANTLRInputStream(is);
+        ETPLexer lexer = new ETPLexer(input);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        ETPParser parser = new ETPParser(tokens);
+        parser.removeErrorListeners();
+        parser.addErrorListener(new ETPErrorListener());
+        ETPWalker ew = new ETPWalker(tokens);
+        ParseTreeWalker walker = new ParseTreeWalker();
+        List<ETPTerm> terms = null;
+
+        ETPParser.Etp_termsContext t = null;
+        try {
+            t = parser.etp_terms();
+            walker.walk(ew, t);
+        } catch (Throwable e) {
+            throw new ParseException("ETP parse error", e);
+        }
+        terms = (List<ETPTerm>)ew.getValue(t);
+        return terms;
     }
 
     public static class ParseException extends Exception {
