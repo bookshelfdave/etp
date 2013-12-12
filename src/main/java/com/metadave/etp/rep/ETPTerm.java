@@ -26,14 +26,11 @@ import com.ericsson.otp.erlang.OtpErlangObject;
 public abstract class ETPTerm<T> {
     protected T value;
 
-    private String whiteLeft = "";
-    private String whiteRight = "";
-    private String commentsLeft = "";
-    private String commentsRight = "";
 
     public ETPTerm() {
 
     }
+
 
     public abstract OtpErlangObject getOTP();
 
@@ -60,37 +57,5 @@ public abstract class ETPTerm<T> {
             b.append(" ");
         }
         return b.toString();
-    }
-
-    public String getWhiteLeft() {
-        return whiteLeft;
-    }
-
-    public void setWhiteLeft(String whiteLeft) {
-        this.whiteLeft = whiteLeft;
-    }
-
-    public String getWhiteRight() {
-        return whiteRight;
-    }
-
-    public void setWhiteRight(String whiteRight) {
-        this.whiteRight = whiteRight;
-    }
-
-    public String getCommentsLeft() {
-        return commentsLeft;
-    }
-
-    public void setCommentsLeft(String commentsLeft) {
-        this.commentsLeft = commentsLeft;
-    }
-
-    public String getCommentsRight() {
-        return commentsRight;
-    }
-
-    public void setCommentsRight(String commentsRight) {
-        this.commentsRight = commentsRight;
     }
 }

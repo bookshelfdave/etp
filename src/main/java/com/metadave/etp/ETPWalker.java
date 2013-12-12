@@ -222,7 +222,6 @@ public class ETPWalker extends ETPBaseListener {
                     b.append(t.getText());
                 }
                 //System.out.println("[[" + b.toString() + "[[");
-                erlTerm.setWhiteLeft(b.toString());
             }
 
             if (whiteRight != null) {
@@ -231,7 +230,6 @@ public class ETPWalker extends ETPBaseListener {
                     b.append(t.getText());
                 }
                 //System.out.println("]]" + b.toString() + "]]");
-                erlTerm.setWhiteRight(b.toString());
             }
 
             if (commentsLeft != null) {
@@ -240,7 +238,6 @@ public class ETPWalker extends ETPBaseListener {
                     b.append(t.getText());
                 }
                 //System.out.println("cc" + b.toString() + "cc");
-                erlTerm.setCommentsLeft(b.toString());
             }
 
             if (commentsRight != null) {
@@ -249,7 +246,6 @@ public class ETPWalker extends ETPBaseListener {
                     b.append(t.getText());
                 }
                 //System.out.println("CC" + b.toString() + "CC");
-                erlTerm.setCommentsRight(b.toString());
             }
             return erlTerm;
         } else {
@@ -257,15 +253,4 @@ public class ETPWalker extends ETPBaseListener {
         }
 
     }
-
-
-    //    @Test
-//    public void testStripQuotes() {
-//        // TODO: edge cases
-//        //assertEquals("this is \"a test\"", stripQuotes("\"this is \"a test\"\""));
-//        String orig ="\"{\\\"Foo\\\":1}\"";
-//        System.out.println(orig);
-//        assertEquals("{\"Foo\":1}",stripQuotes(orig));
-//    }
-
 }

@@ -34,4 +34,5 @@ public class ETPAtom extends ETPTerm<String> {
     public OtpErlangObject getOTP() {
         return new OtpErlangAtom(this.getValue());
     }
+
 }
