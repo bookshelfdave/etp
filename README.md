@@ -1,5 +1,7 @@
 ## ETP: An Erlang Term Parser for Java. 
 
+[![Build Status](https://travis-ci.org/metadave/etp.png)](https://travis-ci.org/metadave/etp)
+
 Given a String of Erlang terms, ETP will parse the string into a tree of ETP Java objects. Calling toString() on an ETP object will render a tree as an Erlang term.
 
 ### Building
