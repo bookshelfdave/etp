@@ -21,6 +21,7 @@
 
 package com.metadave.etp;
 
+import com.ericsson.otp.erlang.OtpErlangPid;
 import com.metadave.etp.rep.*;
 import org.junit.Test;
 
@@ -181,8 +182,26 @@ public class TestETP {
 
     @Test
     public void testPIDs() throws Exception  {
-        ETPTerm<?> t = ETP.parse("<0.33.0>");
-        assertEquals("<0.33.0>", t.toString());
+        {
+            ETPTerm<?> t = ETP.parse("<0.33.0>");
+            assertEquals("<0.33.0>", t.toString());
+            assertEquals(t.getOTP(), new OtpErlangPid("", 0, 33, 0));
+        }
+        {
+            OtpErlangPid otpErlangPid = new OtpErlangPid("node", 1, 2, 0);
+            ETPTerm<?> t = ETP.parse(otpErlangPid.toString());
+
+            assertEquals("#Pid<node.1.2>", t.toString());
+            assertEquals(otpErlangPid, t.getOTP());
+        }
+        {
+            OtpErlangPid otpErlangPid = new OtpErlangPid("node@node.node12", 1, 2, 0);
+            ETPTerm<?> t = ETP.parse(otpErlangPid.toString());
+
+            assertEquals("#Pid<node@node.node12.1.2>", t.toString());
+            assertEquals(otpErlangPid, t.getOTP());
+        }
+
     }
 
     @Test
