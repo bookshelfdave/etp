@@ -21,7 +21,7 @@
 
 package com.metadave.etp;
 
-import com.ericsson.otp.erlang.OtpErlangPid;
+import com.ericsson.otp.erlang.*;
 import com.metadave.etp.rep.*;
 import org.junit.Test;
 
@@ -32,6 +32,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class TestETP {
+
+    @Test
+    public void name() throws Exception {
+        String str = "{create,[{pid,#Pid<node.32470.6422>},{study,[{name,\"MACD@tv-basicstudies-69\"},{src,[{symbol,\"BITSTAMP:XRPUSD\"},{resolution,{week,1}}]},{inputs,[{\"fast length\",\"12\"},{\"slow length\",\"26\"},{\"source\",\"close\"},{\"signal smoothing\",\"9\"},{\"simple ma(oscillator)\",\"false\"},{\"simple ma(signal line)\",\"false\"}]},{symbol_info,[{name,\"BITSTAMP:XRPUSD\"},{short_name,\"XRPUSD\"},{base_name,\"BITSTAMP:XRPUSD\"},{description,#Bin<15>},{exchange,\"BITSTAMP\"},{price_scale,100000},{pointvalue,1.0},{min_movement,1},{type,bitcoin},{has_intraday,true},{expiration,undefined},{listed_exchange,\"BITSTAMP\"},{currency,\"USD\"}]},{session_spec,[{timezone,\"Etc/UTC\"},{intervals,\"0000-0000:1234567\"}]},{regular_session_spec,[{timezone,\"Etc/UTC\"},{intervals,\"24x7\"}]}]},{dependencies,[]}]}";
+        ETPTerm term = ETP.parse(str);
+        OtpErlangObject otp = term.getOTP();
+
+        assertEquals(str, otp.toString());
+    }
 
     @Test
     public void testFailure() {
@@ -178,6 +187,13 @@ public class TestETP {
             ETPTerm<?> t = ETP.parse("<<1,2,\"foo\">>");
             assertEquals("<<1,2,\"foo\">>", t.toString());
         }
+    }
+
+    @Test
+    public void testFakeBin() throws Exception {
+        ETPTerm term = ETP.parse("#Bin<15>");
+        assertEquals("#Bin<15>", term.toString());
+        assertEquals(new OtpErlangBinary(new byte[15]), term.getOTP());
     }
 
     @Test

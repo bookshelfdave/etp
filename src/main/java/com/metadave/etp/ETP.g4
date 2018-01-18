@@ -38,6 +38,7 @@ etp_term:
     | etp_list
     | etp_tuple
     | etp_binary
+    | etp_binary_fake
     | etp_pid
     | etp_fun
     | etp_ref
@@ -55,6 +56,7 @@ etp_pid:    LESSTHAN PIDID GREATERTHAN | HASH PID LESSTHAN ID GREATERTHAN;
 etp_fun:    HASH FUN LESSTHAN (.)*? GREATERTHAN;
 etp_binary: BINSTART (segments+=etp_binary_item (COMMA segments+=etp_binary_item)*)? BINEND;
 etp_binary_item: val=INT (COLON size=INT)? | STRING;
+etp_binary_fake: HASH BIN LESSTHAN size=INT GREATERTHAN;
 
 etp_ref:    HASH REF LESSTHAN REFID GREATERTHAN;
 
@@ -62,6 +64,7 @@ etp_ref:    HASH REF LESSTHAN REFID GREATERTHAN;
 FUN:           'Fun';
 REF:           'Ref';
 PID:           'Pid';
+BIN:           'Bin';
 COMMA:         ',';
 LSQUARE:       '[';
 RSQUARE:       ']';
