@@ -15,25 +15,25 @@ public class ETPParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		FUN=1, REF=2, COMMA=3, LSQUARE=4, RSQUARE=5, LCURLY=6, RCURLY=7, LESSTHAN=8, 
-		GREATERTHAN=9, COLON=10, BINSTART=11, BINEND=12, TRUE=13, FALSE=14, AT=15, 
-		HASH=16, DOT=17, ID=18, IDSTRING=19, INT=20, FLOAT=21, PID=22, REFID=23, 
-		STRING=24, LINE_COMMENT=25, WS=26;
+		FUN=1, REF=2, PID=3, BIN=4, COMMA=5, LSQUARE=6, RSQUARE=7, LCURLY=8, RCURLY=9, 
+		LESSTHAN=10, GREATERTHAN=11, COLON=12, BINSTART=13, BINEND=14, TRUE=15, 
+		FALSE=16, AT=17, HASH=18, DOT=19, ID=20, IDSTRING=21, INT=22, FLOAT=23, 
+		PIDID=24, REFID=25, STRING=26, LINE_COMMENT=27, WS=28;
 	public static final String[] tokenNames = {
-		"<INVALID>", "'Fun'", "'Ref'", "','", "'['", "']'", "'{'", "'}'", "'<'", 
-		"'>'", "':'", "'<<'", "'>>'", "'true'", "'false'", "'@'", "'#'", "'.'", 
-		"ID", "IDSTRING", "INT", "FLOAT", "PID", "REFID", "STRING", "LINE_COMMENT", 
-		"WS"
+		"<INVALID>", "'Fun'", "'Ref'", "'Pid'", "'Bin'", "','", "'['", "']'", 
+		"'{'", "'}'", "'<'", "'>'", "':'", "'<<'", "'>>'", "'true'", "'false'", 
+		"'@'", "'#'", "'.'", "ID", "IDSTRING", "INT", "FLOAT", "PIDID", "REFID", 
+		"STRING", "LINE_COMMENT", "WS"
 	};
 	public static final int
 		RULE_etp_terms = 0, RULE_etp_term = 1, RULE_etp_int = 2, RULE_etp_float = 3, 
 		RULE_etp_string = 4, RULE_etp_atom = 5, RULE_etp_bool = 6, RULE_etp_list = 7, 
 		RULE_etp_tuple = 8, RULE_etp_pid = 9, RULE_etp_fun = 10, RULE_etp_binary = 11, 
-		RULE_etp_binary_item = 12, RULE_etp_ref = 13;
+		RULE_etp_binary_item = 12, RULE_etp_binary_fake = 13, RULE_etp_ref = 14;
 	public static final String[] ruleNames = {
 		"etp_terms", "etp_term", "etp_int", "etp_float", "etp_string", "etp_atom", 
 		"etp_bool", "etp_list", "etp_tuple", "etp_pid", "etp_fun", "etp_binary", 
-		"etp_binary_item", "etp_ref"
+		"etp_binary_item", "etp_binary_fake", "etp_ref"
 	};
 
 	@Override
@@ -56,12 +56,12 @@ public class ETPParser extends Parser {
 		public List<Etp_termContext> etp_term() {
 			return getRuleContexts(Etp_termContext.class);
 		}
-		public TerminalNode DOT(int i) {
-			return getToken(ETPParser.DOT, i);
-		}
-		public List<TerminalNode> DOT() { return getTokens(ETPParser.DOT); }
 		public Etp_termContext etp_term(int i) {
 			return getRuleContext(Etp_termContext.class,i);
+		}
+		public List<TerminalNode> DOT() { return getTokens(ETPParser.DOT); }
+		public TerminalNode DOT(int i) {
+			return getToken(ETPParser.DOT, i);
 		}
 		public Etp_termsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -84,17 +84,17 @@ public class ETPParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(31); 
+			setState(33); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(28); etp_term();
-				setState(29); match(DOT);
+				setState(30); etp_term();
+				setState(31); match(DOT);
 				}
 				}
-				setState(33); 
+				setState(35); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LSQUARE) | (1L << LCURLY) | (1L << LESSTHAN) | (1L << BINSTART) | (1L << TRUE) | (1L << FALSE) | (1L << HASH) | (1L << ID) | (1L << IDSTRING) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0) );
@@ -112,29 +112,14 @@ public class ETPParser extends Parser {
 	}
 
 	public static class Etp_termContext extends ParserRuleContext {
-		public Etp_refContext etp_ref() {
-			return getRuleContext(Etp_refContext.class,0);
-		}
 		public Etp_floatContext etp_float() {
 			return getRuleContext(Etp_floatContext.class,0);
 		}
 		public Etp_pidContext etp_pid() {
 			return getRuleContext(Etp_pidContext.class,0);
 		}
-		public Etp_binaryContext etp_binary() {
-			return getRuleContext(Etp_binaryContext.class,0);
-		}
-		public Etp_tupleContext etp_tuple() {
-			return getRuleContext(Etp_tupleContext.class,0);
-		}
-		public Etp_atomContext etp_atom() {
-			return getRuleContext(Etp_atomContext.class,0);
-		}
-		public Etp_stringContext etp_string() {
-			return getRuleContext(Etp_stringContext.class,0);
-		}
-		public Etp_funContext etp_fun() {
-			return getRuleContext(Etp_funContext.class,0);
+		public Etp_binary_fakeContext etp_binary_fake() {
+			return getRuleContext(Etp_binary_fakeContext.class,0);
 		}
 		public Etp_boolContext etp_bool() {
 			return getRuleContext(Etp_boolContext.class,0);
@@ -142,8 +127,26 @@ public class ETPParser extends Parser {
 		public Etp_listContext etp_list() {
 			return getRuleContext(Etp_listContext.class,0);
 		}
+		public Etp_binaryContext etp_binary() {
+			return getRuleContext(Etp_binaryContext.class,0);
+		}
+		public Etp_stringContext etp_string() {
+			return getRuleContext(Etp_stringContext.class,0);
+		}
+		public Etp_refContext etp_ref() {
+			return getRuleContext(Etp_refContext.class,0);
+		}
+		public Etp_tupleContext etp_tuple() {
+			return getRuleContext(Etp_tupleContext.class,0);
+		}
+		public Etp_atomContext etp_atom() {
+			return getRuleContext(Etp_atomContext.class,0);
+		}
 		public Etp_intContext etp_int() {
 			return getRuleContext(Etp_intContext.class,0);
+		}
+		public Etp_funContext etp_fun() {
+			return getRuleContext(Etp_funContext.class,0);
 		}
 		public Etp_termContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -163,82 +166,89 @@ public class ETPParser extends Parser {
 		Etp_termContext _localctx = new Etp_termContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_etp_term);
 		try {
-			setState(46);
+			setState(49);
 			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(35); etp_atom();
+				setState(37); etp_atom();
 				}
 				break;
 
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(36); etp_int();
+				setState(38); etp_int();
 				}
 				break;
 
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(37); etp_float();
+				setState(39); etp_float();
 				}
 				break;
 
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(38); etp_string();
+				setState(40); etp_string();
 				}
 				break;
 
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(39); etp_bool();
+				setState(41); etp_bool();
 				}
 				break;
 
 			case 6:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(40); etp_list();
+				setState(42); etp_list();
 				}
 				break;
 
 			case 7:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(41); etp_tuple();
+				setState(43); etp_tuple();
 				}
 				break;
 
 			case 8:
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(42); etp_binary();
+				setState(44); etp_binary();
 				}
 				break;
 
 			case 9:
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(43); etp_pid();
+				setState(45); etp_binary_fake();
 				}
 				break;
 
 			case 10:
 				enterOuterAlt(_localctx, 10);
 				{
-				setState(44); etp_fun();
+				setState(46); etp_pid();
 				}
 				break;
 
 			case 11:
 				enterOuterAlt(_localctx, 11);
 				{
-				setState(45); etp_ref();
+				setState(47); etp_fun();
+				}
+				break;
+
+			case 12:
+				enterOuterAlt(_localctx, 12);
+				{
+				setState(48); etp_ref();
 				}
 				break;
 			}
@@ -276,7 +286,7 @@ public class ETPParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(48); match(INT);
+			setState(51); match(INT);
 			}
 		}
 		catch (RecognitionException re) {
@@ -312,7 +322,7 @@ public class ETPParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(50); match(FLOAT);
+			setState(53); match(FLOAT);
 			}
 		}
 		catch (RecognitionException re) {
@@ -348,7 +358,7 @@ public class ETPParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(52); match(STRING);
+			setState(55); match(STRING);
 			}
 		}
 		catch (RecognitionException re) {
@@ -363,8 +373,8 @@ public class ETPParser extends Parser {
 	}
 
 	public static class Etp_atomContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(ETPParser.ID, 0); }
 		public TerminalNode IDSTRING() { return getToken(ETPParser.IDSTRING, 0); }
+		public TerminalNode ID() { return getToken(ETPParser.ID, 0); }
 		public Etp_atomContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -386,7 +396,7 @@ public class ETPParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(54);
+			setState(57);
 			_la = _input.LA(1);
 			if ( !(_la==ID || _la==IDSTRING) ) {
 			_errHandler.recoverInline(this);
@@ -406,8 +416,8 @@ public class ETPParser extends Parser {
 	}
 
 	public static class Etp_boolContext extends ParserRuleContext {
-		public TerminalNode FALSE() { return getToken(ETPParser.FALSE, 0); }
 		public TerminalNode TRUE() { return getToken(ETPParser.TRUE, 0); }
+		public TerminalNode FALSE() { return getToken(ETPParser.FALSE, 0); }
 		public Etp_boolContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -429,7 +439,7 @@ public class ETPParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(56);
+			setState(59);
 			_la = _input.LA(1);
 			if ( !(_la==TRUE || _la==FALSE) ) {
 			_errHandler.recoverInline(this);
@@ -451,15 +461,15 @@ public class ETPParser extends Parser {
 	public static class Etp_listContext extends ParserRuleContext {
 		public Etp_termContext etp_term;
 		public List<Etp_termContext> listitems = new ArrayList<Etp_termContext>();
-		public List<Etp_termContext> etp_term() {
-			return getRuleContexts(Etp_termContext.class);
-		}
+		public List<TerminalNode> COMMA() { return getTokens(ETPParser.COMMA); }
+		public TerminalNode LSQUARE() { return getToken(ETPParser.LSQUARE, 0); }
+		public TerminalNode RSQUARE() { return getToken(ETPParser.RSQUARE, 0); }
 		public TerminalNode COMMA(int i) {
 			return getToken(ETPParser.COMMA, i);
 		}
-		public TerminalNode LSQUARE() { return getToken(ETPParser.LSQUARE, 0); }
-		public TerminalNode RSQUARE() { return getToken(ETPParser.RSQUARE, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(ETPParser.COMMA); }
+		public List<Etp_termContext> etp_term() {
+			return getRuleContexts(Etp_termContext.class);
+		}
 		public Etp_termContext etp_term(int i) {
 			return getRuleContext(Etp_termContext.class,i);
 		}
@@ -484,32 +494,32 @@ public class ETPParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(58); match(LSQUARE);
-			setState(67);
+			setState(61); match(LSQUARE);
+			setState(70);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LSQUARE) | (1L << LCURLY) | (1L << LESSTHAN) | (1L << BINSTART) | (1L << TRUE) | (1L << FALSE) | (1L << HASH) | (1L << ID) | (1L << IDSTRING) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0)) {
 				{
-				setState(59); ((Etp_listContext)_localctx).etp_term = etp_term();
+				setState(62); ((Etp_listContext)_localctx).etp_term = etp_term();
 				((Etp_listContext)_localctx).listitems.add(((Etp_listContext)_localctx).etp_term);
-				setState(64);
+				setState(67);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(60); match(COMMA);
-					setState(61); ((Etp_listContext)_localctx).etp_term = etp_term();
+					setState(63); match(COMMA);
+					setState(64); ((Etp_listContext)_localctx).etp_term = etp_term();
 					((Etp_listContext)_localctx).listitems.add(((Etp_listContext)_localctx).etp_term);
 					}
 					}
-					setState(66);
+					setState(69);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(69); match(RSQUARE);
+			setState(72); match(RSQUARE);
 			}
 		}
 		catch (RecognitionException re) {
@@ -526,17 +536,17 @@ public class ETPParser extends Parser {
 	public static class Etp_tupleContext extends ParserRuleContext {
 		public Etp_termContext etp_term;
 		public List<Etp_termContext> tupleitems = new ArrayList<Etp_termContext>();
-		public List<Etp_termContext> etp_term() {
-			return getRuleContexts(Etp_termContext.class);
-		}
-		public TerminalNode LCURLY() { return getToken(ETPParser.LCURLY, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(ETPParser.COMMA); }
 		public TerminalNode COMMA(int i) {
 			return getToken(ETPParser.COMMA, i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(ETPParser.COMMA); }
+		public List<Etp_termContext> etp_term() {
+			return getRuleContexts(Etp_termContext.class);
+		}
 		public Etp_termContext etp_term(int i) {
 			return getRuleContext(Etp_termContext.class,i);
 		}
+		public TerminalNode LCURLY() { return getToken(ETPParser.LCURLY, 0); }
 		public TerminalNode RCURLY() { return getToken(ETPParser.RCURLY, 0); }
 		public Etp_tupleContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -559,32 +569,32 @@ public class ETPParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(71); match(LCURLY);
-			setState(80);
+			setState(74); match(LCURLY);
+			setState(83);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LSQUARE) | (1L << LCURLY) | (1L << LESSTHAN) | (1L << BINSTART) | (1L << TRUE) | (1L << FALSE) | (1L << HASH) | (1L << ID) | (1L << IDSTRING) | (1L << INT) | (1L << FLOAT) | (1L << STRING))) != 0)) {
 				{
-				setState(72); ((Etp_tupleContext)_localctx).etp_term = etp_term();
+				setState(75); ((Etp_tupleContext)_localctx).etp_term = etp_term();
 				((Etp_tupleContext)_localctx).tupleitems.add(((Etp_tupleContext)_localctx).etp_term);
-				setState(77);
+				setState(80);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(73); match(COMMA);
-					setState(74); ((Etp_tupleContext)_localctx).etp_term = etp_term();
+					setState(76); match(COMMA);
+					setState(77); ((Etp_tupleContext)_localctx).etp_term = etp_term();
 					((Etp_tupleContext)_localctx).tupleitems.add(((Etp_tupleContext)_localctx).etp_term);
 					}
 					}
-					setState(79);
+					setState(82);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(82); match(RCURLY);
+			setState(85); match(RCURLY);
 			}
 		}
 		catch (RecognitionException re) {
@@ -601,7 +611,10 @@ public class ETPParser extends Parser {
 	public static class Etp_pidContext extends ParserRuleContext {
 		public TerminalNode LESSTHAN() { return getToken(ETPParser.LESSTHAN, 0); }
 		public TerminalNode PID() { return getToken(ETPParser.PID, 0); }
+		public TerminalNode ID() { return getToken(ETPParser.ID, 0); }
 		public TerminalNode GREATERTHAN() { return getToken(ETPParser.GREATERTHAN, 0); }
+		public TerminalNode PIDID() { return getToken(ETPParser.PIDID, 0); }
+		public TerminalNode HASH() { return getToken(ETPParser.HASH, 0); }
 		public Etp_pidContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -620,11 +633,28 @@ public class ETPParser extends Parser {
 		Etp_pidContext _localctx = new Etp_pidContext(_ctx, getState());
 		enterRule(_localctx, 18, RULE_etp_pid);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(84); match(LESSTHAN);
-			setState(85); match(PID);
-			setState(86); match(GREATERTHAN);
+			setState(95);
+			switch (_input.LA(1)) {
+			case LESSTHAN:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(87); match(LESSTHAN);
+				setState(88); match(PIDID);
+				setState(89); match(GREATERTHAN);
+				}
+				break;
+			case HASH:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(90); match(HASH);
+				setState(91); match(PID);
+				setState(92); match(LESSTHAN);
+				setState(93); match(ID);
+				setState(94); match(GREATERTHAN);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -639,10 +669,10 @@ public class ETPParser extends Parser {
 	}
 
 	public static class Etp_funContext extends ParserRuleContext {
-		public TerminalNode HASH() { return getToken(ETPParser.HASH, 0); }
 		public TerminalNode LESSTHAN() { return getToken(ETPParser.LESSTHAN, 0); }
-		public TerminalNode FUN() { return getToken(ETPParser.FUN, 0); }
 		public TerminalNode GREATERTHAN() { return getToken(ETPParser.GREATERTHAN, 0); }
+		public TerminalNode FUN() { return getToken(ETPParser.FUN, 0); }
+		public TerminalNode HASH() { return getToken(ETPParser.HASH, 0); }
 		public Etp_funContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -664,26 +694,26 @@ public class ETPParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(88); match(HASH);
-			setState(89); match(FUN);
-			setState(90); match(LESSTHAN);
-			setState(94);
+			setState(97); match(HASH);
+			setState(98); match(FUN);
+			setState(99); match(LESSTHAN);
+			setState(103);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,7,_ctx);
 			while ( _alt!=1 && _alt!=-1 ) {
 				if ( _alt==1+1 ) {
 					{
 					{
-					setState(91);
+					setState(100);
 					matchWildcard();
 					}
 					} 
 				}
-				setState(96);
+				setState(105);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,7,_ctx);
 			}
-			setState(97); match(GREATERTHAN);
+			setState(106); match(GREATERTHAN);
 			}
 		}
 		catch (RecognitionException re) {
@@ -700,18 +730,18 @@ public class ETPParser extends Parser {
 	public static class Etp_binaryContext extends ParserRuleContext {
 		public Etp_binary_itemContext etp_binary_item;
 		public List<Etp_binary_itemContext> segments = new ArrayList<Etp_binary_itemContext>();
+		public List<TerminalNode> COMMA() { return getTokens(ETPParser.COMMA); }
+		public Etp_binary_itemContext etp_binary_item(int i) {
+			return getRuleContext(Etp_binary_itemContext.class,i);
+		}
+		public List<Etp_binary_itemContext> etp_binary_item() {
+			return getRuleContexts(Etp_binary_itemContext.class);
+		}
 		public TerminalNode COMMA(int i) {
 			return getToken(ETPParser.COMMA, i);
 		}
 		public TerminalNode BINSTART() { return getToken(ETPParser.BINSTART, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(ETPParser.COMMA); }
 		public TerminalNode BINEND() { return getToken(ETPParser.BINEND, 0); }
-		public List<Etp_binary_itemContext> etp_binary_item() {
-			return getRuleContexts(Etp_binary_itemContext.class);
-		}
-		public Etp_binary_itemContext etp_binary_item(int i) {
-			return getRuleContext(Etp_binary_itemContext.class,i);
-		}
 		public Etp_binaryContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -733,32 +763,32 @@ public class ETPParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(99); match(BINSTART);
-			setState(108);
+			setState(108); match(BINSTART);
+			setState(117);
 			_la = _input.LA(1);
 			if (_la==INT || _la==STRING) {
 				{
-				setState(100); ((Etp_binaryContext)_localctx).etp_binary_item = etp_binary_item();
+				setState(109); ((Etp_binaryContext)_localctx).etp_binary_item = etp_binary_item();
 				((Etp_binaryContext)_localctx).segments.add(((Etp_binaryContext)_localctx).etp_binary_item);
-				setState(105);
+				setState(114);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(101); match(COMMA);
-					setState(102); ((Etp_binaryContext)_localctx).etp_binary_item = etp_binary_item();
+					setState(110); match(COMMA);
+					setState(111); ((Etp_binaryContext)_localctx).etp_binary_item = etp_binary_item();
 					((Etp_binaryContext)_localctx).segments.add(((Etp_binaryContext)_localctx).etp_binary_item);
 					}
 					}
-					setState(107);
+					setState(116);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(110); match(BINEND);
+			setState(119); match(BINEND);
 			}
 		}
 		catch (RecognitionException re) {
@@ -775,12 +805,12 @@ public class ETPParser extends Parser {
 	public static class Etp_binary_itemContext extends ParserRuleContext {
 		public Token val;
 		public Token size;
+		public TerminalNode STRING() { return getToken(ETPParser.STRING, 0); }
 		public TerminalNode COLON() { return getToken(ETPParser.COLON, 0); }
-		public List<TerminalNode> INT() { return getTokens(ETPParser.INT); }
 		public TerminalNode INT(int i) {
 			return getToken(ETPParser.INT, i);
 		}
-		public TerminalNode STRING() { return getToken(ETPParser.STRING, 0); }
+		public List<TerminalNode> INT() { return getTokens(ETPParser.INT); }
 		public Etp_binary_itemContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -800,18 +830,18 @@ public class ETPParser extends Parser {
 		enterRule(_localctx, 24, RULE_etp_binary_item);
 		int _la;
 		try {
-			setState(118);
+			setState(127);
 			switch (_input.LA(1)) {
 			case INT:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(112); ((Etp_binary_itemContext)_localctx).val = match(INT);
-				setState(115);
+				setState(121); ((Etp_binary_itemContext)_localctx).val = match(INT);
+				setState(124);
 				_la = _input.LA(1);
 				if (_la==COLON) {
 					{
-					setState(113); match(COLON);
-					setState(114); ((Etp_binary_itemContext)_localctx).size = match(INT);
+					setState(122); match(COLON);
+					setState(123); ((Etp_binary_itemContext)_localctx).size = match(INT);
 					}
 				}
 
@@ -820,7 +850,7 @@ public class ETPParser extends Parser {
 			case STRING:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(117); match(STRING);
+				setState(126); match(STRING);
 				}
 				break;
 			default:
@@ -838,12 +868,57 @@ public class ETPParser extends Parser {
 		return _localctx;
 	}
 
-	public static class Etp_refContext extends ParserRuleContext {
+	public static class Etp_binary_fakeContext extends ParserRuleContext {
+		public Token size;
+		public TerminalNode BIN() { return getToken(ETPParser.BIN, 0); }
+		public TerminalNode LESSTHAN() { return getToken(ETPParser.LESSTHAN, 0); }
+		public TerminalNode GREATERTHAN() { return getToken(ETPParser.GREATERTHAN, 0); }
+		public TerminalNode INT() { return getToken(ETPParser.INT, 0); }
 		public TerminalNode HASH() { return getToken(ETPParser.HASH, 0); }
+		public Etp_binary_fakeContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_etp_binary_fake; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ETPListener ) ((ETPListener)listener).enterEtp_binary_fake(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ETPListener ) ((ETPListener)listener).exitEtp_binary_fake(this);
+		}
+	}
+
+	public final Etp_binary_fakeContext etp_binary_fake() throws RecognitionException {
+		Etp_binary_fakeContext _localctx = new Etp_binary_fakeContext(_ctx, getState());
+		enterRule(_localctx, 26, RULE_etp_binary_fake);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(129); match(HASH);
+			setState(130); match(BIN);
+			setState(131); match(LESSTHAN);
+			setState(132); ((Etp_binary_fakeContext)_localctx).size = match(INT);
+			setState(133); match(GREATERTHAN);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Etp_refContext extends ParserRuleContext {
+		public TerminalNode REF() { return getToken(ETPParser.REF, 0); }
 		public TerminalNode LESSTHAN() { return getToken(ETPParser.LESSTHAN, 0); }
 		public TerminalNode REFID() { return getToken(ETPParser.REFID, 0); }
-		public TerminalNode REF() { return getToken(ETPParser.REF, 0); }
 		public TerminalNode GREATERTHAN() { return getToken(ETPParser.GREATERTHAN, 0); }
+		public TerminalNode HASH() { return getToken(ETPParser.HASH, 0); }
 		public Etp_refContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -860,15 +935,15 @@ public class ETPParser extends Parser {
 
 	public final Etp_refContext etp_ref() throws RecognitionException {
 		Etp_refContext _localctx = new Etp_refContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_etp_ref);
+		enterRule(_localctx, 28, RULE_etp_ref);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(120); match(HASH);
-			setState(121); match(REF);
-			setState(122); match(LESSTHAN);
-			setState(123); match(REFID);
-			setState(124); match(GREATERTHAN);
+			setState(135); match(HASH);
+			setState(136); match(REF);
+			setState(137); match(LESSTHAN);
+			setState(138); match(REFID);
+			setState(139); match(GREATERTHAN);
 			}
 		}
 		catch (RecognitionException re) {
@@ -883,37 +958,43 @@ public class ETPParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\2\3\34\u0081\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b"+
-		"\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\3\2\3\2"+
-		"\3\2\6\2\"\n\2\r\2\16\2#\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5"+
-		"\3\61\n\3\3\4\3\4\3\5\3\5\3\6\3\6\3\7\3\7\3\b\3\b\3\t\3\t\3\t\3\t\7\t"+
-		"A\n\t\f\t\16\tD\13\t\5\tF\n\t\3\t\3\t\3\n\3\n\3\n\3\n\7\nN\n\n\f\n\16"+
-		"\nQ\13\n\5\nS\n\n\3\n\3\n\3\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\7\f_\n\f"+
-		"\f\f\16\fb\13\f\3\f\3\f\3\r\3\r\3\r\3\r\7\rj\n\r\f\r\16\rm\13\r\5\ro\n"+
-		"\r\3\r\3\r\3\16\3\16\3\16\5\16v\n\16\3\16\5\16y\n\16\3\17\3\17\3\17\3"+
-		"\17\3\17\3\17\3\17\3`\20\2\4\6\b\n\f\16\20\22\24\26\30\32\34\2\4\3\24"+
-		"\25\3\17\20\u0086\2!\3\2\2\2\4\60\3\2\2\2\6\62\3\2\2\2\b\64\3\2\2\2\n"+
-		"\66\3\2\2\2\f8\3\2\2\2\16:\3\2\2\2\20<\3\2\2\2\22I\3\2\2\2\24V\3\2\2\2"+
-		"\26Z\3\2\2\2\30e\3\2\2\2\32x\3\2\2\2\34z\3\2\2\2\36\37\5\4\3\2\37 \7\23"+
-		"\2\2 \"\3\2\2\2!\36\3\2\2\2\"#\3\2\2\2#!\3\2\2\2#$\3\2\2\2$\3\3\2\2\2"+
-		"%\61\5\f\7\2&\61\5\6\4\2\'\61\5\b\5\2(\61\5\n\6\2)\61\5\16\b\2*\61\5\20"+
-		"\t\2+\61\5\22\n\2,\61\5\30\r\2-\61\5\24\13\2.\61\5\26\f\2/\61\5\34\17"+
-		"\2\60%\3\2\2\2\60&\3\2\2\2\60\'\3\2\2\2\60(\3\2\2\2\60)\3\2\2\2\60*\3"+
-		"\2\2\2\60+\3\2\2\2\60,\3\2\2\2\60-\3\2\2\2\60.\3\2\2\2\60/\3\2\2\2\61"+
-		"\5\3\2\2\2\62\63\7\26\2\2\63\7\3\2\2\2\64\65\7\27\2\2\65\t\3\2\2\2\66"+
-		"\67\7\32\2\2\67\13\3\2\2\289\t\2\2\29\r\3\2\2\2:;\t\3\2\2;\17\3\2\2\2"+
-		"<E\7\6\2\2=B\5\4\3\2>?\7\5\2\2?A\5\4\3\2@>\3\2\2\2AD\3\2\2\2B@\3\2\2\2"+
-		"BC\3\2\2\2CF\3\2\2\2DB\3\2\2\2E=\3\2\2\2EF\3\2\2\2FG\3\2\2\2GH\7\7\2\2"+
-		"H\21\3\2\2\2IR\7\b\2\2JO\5\4\3\2KL\7\5\2\2LN\5\4\3\2MK\3\2\2\2NQ\3\2\2"+
-		"\2OM\3\2\2\2OP\3\2\2\2PS\3\2\2\2QO\3\2\2\2RJ\3\2\2\2RS\3\2\2\2ST\3\2\2"+
-		"\2TU\7\t\2\2U\23\3\2\2\2VW\7\n\2\2WX\7\30\2\2XY\7\13\2\2Y\25\3\2\2\2Z"+
-		"[\7\22\2\2[\\\7\3\2\2\\`\7\n\2\2]_\13\2\2\2^]\3\2\2\2_b\3\2\2\2`a\3\2"+
-		"\2\2`^\3\2\2\2ac\3\2\2\2b`\3\2\2\2cd\7\13\2\2d\27\3\2\2\2en\7\r\2\2fk"+
-		"\5\32\16\2gh\7\5\2\2hj\5\32\16\2ig\3\2\2\2jm\3\2\2\2ki\3\2\2\2kl\3\2\2"+
-		"\2lo\3\2\2\2mk\3\2\2\2nf\3\2\2\2no\3\2\2\2op\3\2\2\2pq\7\16\2\2q\31\3"+
-		"\2\2\2ru\7\26\2\2st\7\f\2\2tv\7\26\2\2us\3\2\2\2uv\3\2\2\2vy\3\2\2\2w"+
-		"y\7\32\2\2xr\3\2\2\2xw\3\2\2\2y\33\3\2\2\2z{\7\22\2\2{|\7\4\2\2|}\7\n"+
-		"\2\2}~\7\31\2\2~\177\7\13\2\2\177\35\3\2\2\2\r#\60BEOR`knux";
+		"\2\3\36\u0090\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b"+
+		"\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t"+
+		"\20\3\2\3\2\3\2\6\2$\n\2\r\2\16\2%\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
+		"\3\3\3\3\3\3\5\3\64\n\3\3\4\3\4\3\5\3\5\3\6\3\6\3\7\3\7\3\b\3\b\3\t\3"+
+		"\t\3\t\3\t\7\tD\n\t\f\t\16\tG\13\t\5\tI\n\t\3\t\3\t\3\n\3\n\3\n\3\n\7"+
+		"\nQ\n\n\f\n\16\nT\13\n\5\nV\n\n\3\n\3\n\3\13\3\13\3\13\3\13\3\13\3\13"+
+		"\3\13\3\13\5\13b\n\13\3\f\3\f\3\f\3\f\7\fh\n\f\f\f\16\fk\13\f\3\f\3\f"+
+		"\3\r\3\r\3\r\3\r\7\rs\n\r\f\r\16\rv\13\r\5\rx\n\r\3\r\3\r\3\16\3\16\3"+
+		"\16\5\16\177\n\16\3\16\5\16\u0082\n\16\3\17\3\17\3\17\3\17\3\17\3\17\3"+
+		"\20\3\20\3\20\3\20\3\20\3\20\3\20\3i\21\2\4\6\b\n\f\16\20\22\24\26\30"+
+		"\32\34\36\2\4\3\26\27\3\21\22\u0096\2#\3\2\2\2\4\63\3\2\2\2\6\65\3\2\2"+
+		"\2\b\67\3\2\2\2\n9\3\2\2\2\f;\3\2\2\2\16=\3\2\2\2\20?\3\2\2\2\22L\3\2"+
+		"\2\2\24a\3\2\2\2\26c\3\2\2\2\30n\3\2\2\2\32\u0081\3\2\2\2\34\u0083\3\2"+
+		"\2\2\36\u0089\3\2\2\2 !\5\4\3\2!\"\7\25\2\2\"$\3\2\2\2# \3\2\2\2$%\3\2"+
+		"\2\2%#\3\2\2\2%&\3\2\2\2&\3\3\2\2\2\'\64\5\f\7\2(\64\5\6\4\2)\64\5\b\5"+
+		"\2*\64\5\n\6\2+\64\5\16\b\2,\64\5\20\t\2-\64\5\22\n\2.\64\5\30\r\2/\64"+
+		"\5\34\17\2\60\64\5\24\13\2\61\64\5\26\f\2\62\64\5\36\20\2\63\'\3\2\2\2"+
+		"\63(\3\2\2\2\63)\3\2\2\2\63*\3\2\2\2\63+\3\2\2\2\63,\3\2\2\2\63-\3\2\2"+
+		"\2\63.\3\2\2\2\63/\3\2\2\2\63\60\3\2\2\2\63\61\3\2\2\2\63\62\3\2\2\2\64"+
+		"\5\3\2\2\2\65\66\7\30\2\2\66\7\3\2\2\2\678\7\31\2\28\t\3\2\2\29:\7\34"+
+		"\2\2:\13\3\2\2\2;<\t\2\2\2<\r\3\2\2\2=>\t\3\2\2>\17\3\2\2\2?H\7\b\2\2"+
+		"@E\5\4\3\2AB\7\7\2\2BD\5\4\3\2CA\3\2\2\2DG\3\2\2\2EC\3\2\2\2EF\3\2\2\2"+
+		"FI\3\2\2\2GE\3\2\2\2H@\3\2\2\2HI\3\2\2\2IJ\3\2\2\2JK\7\t\2\2K\21\3\2\2"+
+		"\2LU\7\n\2\2MR\5\4\3\2NO\7\7\2\2OQ\5\4\3\2PN\3\2\2\2QT\3\2\2\2RP\3\2\2"+
+		"\2RS\3\2\2\2SV\3\2\2\2TR\3\2\2\2UM\3\2\2\2UV\3\2\2\2VW\3\2\2\2WX\7\13"+
+		"\2\2X\23\3\2\2\2YZ\7\f\2\2Z[\7\32\2\2[b\7\r\2\2\\]\7\24\2\2]^\7\5\2\2"+
+		"^_\7\f\2\2_`\7\26\2\2`b\7\r\2\2aY\3\2\2\2a\\\3\2\2\2b\25\3\2\2\2cd\7\24"+
+		"\2\2de\7\3\2\2ei\7\f\2\2fh\13\2\2\2gf\3\2\2\2hk\3\2\2\2ij\3\2\2\2ig\3"+
+		"\2\2\2jl\3\2\2\2ki\3\2\2\2lm\7\r\2\2m\27\3\2\2\2nw\7\17\2\2ot\5\32\16"+
+		"\2pq\7\7\2\2qs\5\32\16\2rp\3\2\2\2sv\3\2\2\2tr\3\2\2\2tu\3\2\2\2ux\3\2"+
+		"\2\2vt\3\2\2\2wo\3\2\2\2wx\3\2\2\2xy\3\2\2\2yz\7\20\2\2z\31\3\2\2\2{~"+
+		"\7\30\2\2|}\7\16\2\2}\177\7\30\2\2~|\3\2\2\2~\177\3\2\2\2\177\u0082\3"+
+		"\2\2\2\u0080\u0082\7\34\2\2\u0081{\3\2\2\2\u0081\u0080\3\2\2\2\u0082\33"+
+		"\3\2\2\2\u0083\u0084\7\24\2\2\u0084\u0085\7\6\2\2\u0085\u0086\7\f\2\2"+
+		"\u0086\u0087\7\30\2\2\u0087\u0088\7\r\2\2\u0088\35\3\2\2\2\u0089\u008a"+
+		"\7\24\2\2\u008a\u008b\7\4\2\2\u008b\u008c\7\f\2\2\u008c\u008d\7\33\2\2"+
+		"\u008d\u008e\7\r\2\2\u008e\37\3\2\2\2\16%\63EHRUaitw~\u0081";
 	public static final ATN _ATN =
 		ATNSimulator.deserialize(_serializedATN.toCharArray());
 	static {

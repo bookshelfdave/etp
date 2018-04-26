@@ -75,6 +75,8 @@ public class ETPWalker extends ETPBaseListener {
             setValue(ctx, getValue(ctx.etp_tuple()));
         } else if (ctx.etp_binary() != null) {
             setValue(ctx, getValue(ctx.etp_binary()));
+        } else if (ctx.etp_binary_fake() != null) {
+            setValue(ctx, getValue(ctx.etp_binary_fake()));
         } else if (ctx.etp_pid() != null) {
             setValue(ctx, getValue(ctx.etp_pid()));
         } else if (ctx.etp_ref() != null) {
@@ -182,6 +184,11 @@ public class ETPWalker extends ETPBaseListener {
             }
         }
         setValue(ctx, v);
+    }
+
+    @Override
+    public void exitEtp_binary_fake(ETPParser.Etp_binary_fakeContext ctx) {
+        setValue(ctx, new ETPBinaryFake(Integer.valueOf(ctx.size.getText())));
     }
 
     @Override

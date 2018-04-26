@@ -22,14 +22,39 @@
 package com.metadave.etp.rep;
 
 import com.ericsson.otp.erlang.OtpErlangObject;
+import com.ericsson.otp.erlang.OtpErlangPid;
 
-public class ETPPid extends ETPTerm<String> {
+public class ETPPid extends com.metadave.etp.rep.ETPTerm<String> {
     public ETPPid(String value) {
         super(value);
     }
 
     @Override
     public OtpErlangObject getOTP() {
-        return null;
+        int open = value.indexOf('<');
+        int close = value.lastIndexOf('>');
+        String body = value.substring(open + 1, close);
+
+        if (value.startsWith("#Pid")) {
+            int lastDot = body.lastIndexOf('.');
+            int serial = Integer.parseInt(body.substring(lastDot + 1));
+            body = body.substring(0, lastDot);
+
+            int penultimateDot = body.lastIndexOf('.');
+
+            String node = body.substring(0, penultimateDot);
+            int id = Integer.parseInt(body.substring(penultimateDot + 1, lastDot));
+
+            return new OtpErlangPid(node, id, serial, 0);
+        }
+
+        int firstDot = body.indexOf('.');
+        int secondDot = body.lastIndexOf('.');
+
+        int id = Integer.parseInt(body.substring(0, firstDot));
+        int serial = Integer.parseInt(body.substring(firstDot + 1, secondDot));
+        int creation = Integer.parseInt(body.substring(secondDot + 1));
+
+        return new OtpErlangPid("", id, serial, creation);
     }
 }

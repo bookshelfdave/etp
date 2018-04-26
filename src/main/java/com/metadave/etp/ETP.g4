@@ -38,6 +38,7 @@ etp_term:
     | etp_list
     | etp_tuple
     | etp_binary
+    | etp_binary_fake
     | etp_pid
     | etp_fun
     | etp_ref
@@ -51,16 +52,19 @@ etp_atom:   ID | IDSTRING;
 etp_bool:   TRUE | FALSE;
 etp_list:   LSQUARE (listitems+=etp_term (COMMA listitems+=etp_term)*)? RSQUARE;
 etp_tuple:  LCURLY (tupleitems+=etp_term (COMMA tupleitems+=etp_term)*)? RCURLY;
-etp_pid:    LESSTHAN PID GREATERTHAN;
+etp_pid:    LESSTHAN PIDID GREATERTHAN | HASH PID LESSTHAN ID GREATERTHAN;
 etp_fun:    HASH FUN LESSTHAN (.)*? GREATERTHAN;
 etp_binary: BINSTART (segments+=etp_binary_item (COMMA segments+=etp_binary_item)*)? BINEND;
 etp_binary_item: val=INT (COLON size=INT)? | STRING;
+etp_binary_fake: HASH BIN LESSTHAN size=INT GREATERTHAN;
 
 etp_ref:    HASH REF LESSTHAN REFID GREATERTHAN;
 
 
 FUN:           'Fun';
 REF:           'Ref';
+PID:           'Pid';
+BIN:           'Bin';
 COMMA:         ',';
 LSQUARE:       '[';
 RSQUARE:       ']';
@@ -88,7 +92,7 @@ FLOAT       :   ('-')? DIGIT+ DOT DIGIT*
                | ('-')?DOT DIGIT+
             ;
 
-PID       :   DIGIT+ DOT DIGIT+ DOT DIGIT+;
+PIDID     :   DIGIT+ DOT DIGIT+ DOT DIGIT+;
 
 REFID     :   DIGIT+ DOT DIGIT+ DOT DIGIT+ DOT DIGIT+;
 

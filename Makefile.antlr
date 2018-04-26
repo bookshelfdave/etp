@@ -1,2 +1,2 @@
 antlr:
-	java -classpath /usr/local/lib/antlr-4.0-complete.jar org.antlr.v4.Tool -o ./ -listener -no-visitor -package com.metadave.etp ./src/main/java/com/metadave/etp/ETP.g4
+	java -classpath lib/antlr-4.0-complete.jar org.antlr.v4.Tool -o ./ -listener -no-visitor -package com.metadave.etp ./src/main/java/com/metadave/etp/ETP.g4
