@@ -248,7 +248,6 @@ public class TestETP {
     @Test
     public void testMap() throws Exception {
         {
-            System.out.println("-------------------------");
             ETPTerm<HashMap<ETPTerm<?>, ETPTerm<?>>> t = ETP.parse("#{foo=>2}");
             assertEquals(new ETPLong(2), t.getValue().get(new ETPAtom("foo")));
         }
