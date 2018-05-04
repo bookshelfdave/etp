@@ -7,6 +7,9 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import org.antlr.v4.runtime.tree.ErrorNode;
 
 public class ETPBaseListener implements ETPListener {
+	@Override public void enterEtp_map(ETPParser.Etp_mapContext ctx) { }
+	@Override public void exitEtp_map(ETPParser.Etp_mapContext ctx) { }
+
 	@Override public void enterEtp_list(ETPParser.Etp_listContext ctx) { }
 	@Override public void exitEtp_list(ETPParser.Etp_listContext ctx) { }
 
@@ -39,6 +42,9 @@ public class ETPBaseListener implements ETPListener {
 
 	@Override public void enterEtp_bool(ETPParser.Etp_boolContext ctx) { }
 	@Override public void exitEtp_bool(ETPParser.Etp_boolContext ctx) { }
+
+	@Override public void enterEtp_kv(ETPParser.Etp_kvContext ctx) { }
+	@Override public void exitEtp_kv(ETPParser.Etp_kvContext ctx) { }
 
 	@Override public void enterEtp_binary(ETPParser.Etp_binaryContext ctx) { }
 	@Override public void exitEtp_binary(ETPParser.Etp_binaryContext ctx) { }

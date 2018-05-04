@@ -37,6 +37,7 @@ etp_term:
     | etp_bool
     | etp_list
     | etp_tuple
+    | etp_map
     | etp_binary
     | etp_binary_fake
     | etp_pid
@@ -45,16 +46,18 @@ etp_term:
     ;
 
 // TODO: $\n, 2#101
-etp_int:    INT;
-etp_float:  FLOAT;
-etp_string: STRING;
-etp_atom:   ID | IDSTRING;
-etp_bool:   TRUE | FALSE;
-etp_list:   LSQUARE (listitems+=etp_term (COMMA listitems+=etp_term)*)? RSQUARE;
-etp_tuple:  LCURLY (tupleitems+=etp_term (COMMA tupleitems+=etp_term)*)? RCURLY;
-etp_pid:    LESSTHAN PIDID GREATERTHAN | HASH PID LESSTHAN ID GREATERTHAN;
-etp_fun:    HASH FUN LESSTHAN (.)*? GREATERTHAN;
-etp_binary: BINSTART (segments+=etp_binary_item (COMMA segments+=etp_binary_item)*)? BINEND;
+etp_int:         INT;
+etp_float:       FLOAT;
+etp_string:      STRING;
+etp_atom:        ID | IDSTRING;
+etp_bool:        TRUE | FALSE;
+etp_map:         HASH LCURLY (kvs+=etp_kv (COMMA kvs+=etp_kv)*)? RCURLY;
+etp_kv:          map_key=etp_term MAPOP map_val=etp_term;
+etp_list:        LSQUARE (listitems+=etp_term (COMMA listitems+=etp_term)*)? RSQUARE;
+etp_tuple:       LCURLY (tupleitems+=etp_term (COMMA tupleitems+=etp_term)*)? RCURLY;
+etp_pid:         LESSTHAN PIDID GREATERTHAN | HASH PID LESSTHAN ID GREATERTHAN;
+etp_fun:         HASH FUN LESSTHAN (.)*? GREATERTHAN;
+etp_binary:      BINSTART (segments+=etp_binary_item (COMMA segments+=etp_binary_item)*)? BINEND;
 etp_binary_item: val=INT (COLON size=INT)? | STRING;
 etp_binary_fake: HASH BIN LESSTHAN size=INT GREATERTHAN;
 
@@ -68,7 +71,7 @@ BIN:           'Bin';
 COMMA:         ',';
 LSQUARE:       '[';
 RSQUARE:       ']';
-
+MAPOP:         '=>';
 LCURLY:        '{';
 RCURLY:        '}';
 LESSTHAN:      '<';

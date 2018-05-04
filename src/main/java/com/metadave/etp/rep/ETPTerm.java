@@ -51,11 +51,21 @@ public abstract class ETPTerm<T> {
         return value.toString();
     }
 
-    protected String makeTab(int tab) {
-        StringBuilder b = new StringBuilder();
-        for(int i = 0; i < tab; i++) {
-            b.append(" ");
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) {
+            return false;
         }
-        return b.toString();
+        if(obj.getClass().equals(this.getClass())) {
+            return this.value.equals(((ETPTerm) obj).getValue());
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        String hasher = this.getClass().getName() + this.value.toString();
+        return hasher.hashCode();
     }
 }
