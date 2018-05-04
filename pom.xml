@@ -64,7 +64,7 @@
         <dependency>
             <groupId>org.erlang.otp</groupId>
             <artifactId>jinterface</artifactId>
-            <version>1.5.6</version>
+            <version>1.6.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -161,7 +161,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.4</version>
+                        <version>1.5</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -172,7 +172,6 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <!-- NOTE: source and javadoc jars automatically generated on release (http://maven.apache.org/pom.html#The_Super_POM) -->
                 </plugins>
             </build>
         </profile>

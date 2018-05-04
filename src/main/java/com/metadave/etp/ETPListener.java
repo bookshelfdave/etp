@@ -4,6 +4,9 @@ import org.antlr.v4.runtime.tree.*;
 import org.antlr.v4.runtime.Token;
 
 public interface ETPListener extends ParseTreeListener {
+	void enterEtp_map(ETPParser.Etp_mapContext ctx);
+	void exitEtp_map(ETPParser.Etp_mapContext ctx);
+
 	void enterEtp_list(ETPParser.Etp_listContext ctx);
 	void exitEtp_list(ETPParser.Etp_listContext ctx);
 
@@ -36,6 +39,9 @@ public interface ETPListener extends ParseTreeListener {
 
 	void enterEtp_bool(ETPParser.Etp_boolContext ctx);
 	void exitEtp_bool(ETPParser.Etp_boolContext ctx);
+
+	void enterEtp_kv(ETPParser.Etp_kvContext ctx);
+	void exitEtp_kv(ETPParser.Etp_kvContext ctx);
 
 	void enterEtp_binary(ETPParser.Etp_binaryContext ctx);
 	void exitEtp_binary(ETPParser.Etp_binaryContext ctx);

@@ -29,6 +29,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ETPWalker extends ETPBaseListener {
@@ -83,6 +84,8 @@ public class ETPWalker extends ETPBaseListener {
             setValue(ctx, getValue(ctx.etp_ref()));
         } else if (ctx.etp_fun() != null) {
             setValue(ctx, getValue(ctx.etp_fun()));
+        } else if (ctx.etp_map() != null) {
+            setValue(ctx, getValue(ctx.etp_map()));
         }
     }
 
@@ -121,6 +124,24 @@ public class ETPWalker extends ETPBaseListener {
     public void exitEtp_bool(ETPParser.Etp_boolContext ctx) {
         String v = ctx.getText();
         setValue(ctx, new ETPBoolean(Boolean.parseBoolean(v)));
+    }
+
+    @Override
+    public void exitEtp_map(ETPParser.Etp_mapContext ctx) {
+        HashMap<ETPTerm, ETPTerm> m = new HashMap<ETPTerm, ETPTerm>();
+        for(ETPParser.Etp_kvContext kv : ctx.kvs) {
+            ETPTerm[] okv = (ETPTerm[])getValue(kv);
+            m.put(okv[0], okv[1]);
+        }
+        setValue(ctx, new ETPMap(m));
+    }
+
+    @Override
+    public void exitEtp_kv(ETPParser.Etp_kvContext ctx) {
+        ETPTerm[] kv = new ETPTerm[2];
+        kv[0] = (ETPTerm)getValue(ctx.map_key);
+        kv[1] = (ETPTerm)getValue(ctx.map_val);
+        setValue(ctx, kv);
     }
 
     @Override

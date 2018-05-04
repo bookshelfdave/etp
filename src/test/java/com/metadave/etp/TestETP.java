@@ -26,6 +26,7 @@ import com.metadave.etp.rep.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -243,5 +244,24 @@ public class TestETP {
             System.out.println(t);
         }
     }
+
+    @Test
+    public void testMap() throws Exception {
+        {
+            ETPTerm<HashMap<ETPTerm<?>, ETPTerm<?>>> t = ETP.parse("#{foo=>2}");
+            assertEquals(new ETPLong(2), t.getValue().get(new ETPAtom("foo")));
+        }
+
+        {
+            ETPTerm<HashMap<ETPTerm<?>, ETPTerm<?>>> t = ETP.parse("#{a => 2, b => 3, c=> 4, \"a\" => 1, \"b\" => 2, \"c\" => 4}");
+            assertEquals(new ETPLong(2), t.getValue().get(new ETPAtom("a")));
+            assertEquals(new ETPLong(3), t.getValue().get(new ETPAtom("b")));
+            assertEquals(new ETPLong(4), t.getValue().get(new ETPAtom("c")));
+            assertEquals(new ETPLong(1), t.getValue().get(new ETPString("a")));
+            assertEquals(new ETPLong(2), t.getValue().get(new ETPString("b")));
+            assertEquals(new ETPLong(4), t.getValue().get(new ETPString("c")));
+        }
+    }
+
 
 }
