@@ -12,7 +12,7 @@ You'll need Maven to build etp.
 
 Also, ETP is available via the [Sonatype OSS repository](https://oss.sonatype.org/index.html#nexus-search;quick~metadave):
 
-```
+```xml
 <dependency>
   <groupId>com.github.metadave</groupId>
   <artifactId>etp</artifactId>
@@ -60,7 +60,7 @@ Antlr 4 grammar [here](https://github.com/metadave/etp/blob/master/src/main/java
 
 ### Example
 
-```
+```java
 // at the moment, whitespace and comments between terms aren't retained
 ETPTuple tuple = (ETPTuple)ETP.parse("{mylist, [1,2,3,4], \n" +
                                       "my_string, \"Hello world\"}");
