@@ -196,12 +196,15 @@ public class ETPWalker extends ETPBaseListener {
             } else {
                 v = new ETPBinary.BinInt(Long.parseLong(ctx.val.getText()));
             }
-        } else if (ctx.STRING() != null) {
+        } else if (ctx.strlines.size()>0) {
+            StringBuilder s=new StringBuilder();
+            for(Token x : ctx.strlines) {
+                s.append(stripQuotes(x.getText()));
+            }
             if (ctx.size != null) {
-                v = new ETPBinary.BinString(stripQuotes(ctx.STRING().getText()),
-                        Integer.parseInt(ctx.size.getText()));
+                v = new ETPBinary.BinString(s.toString(),Integer.parseInt(ctx.size.getText()));
             } else {
-                v = new ETPBinary.BinString(stripQuotes(ctx.STRING().getText()));
+                v = new ETPBinary.BinString(s.toString());
             }
         }
         setValue(ctx, v);
