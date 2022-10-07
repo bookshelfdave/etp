@@ -58,7 +58,7 @@ etp_tuple:       LCURLY (tupleitems+=etp_term (COMMA tupleitems+=etp_term)*)? RC
 etp_pid:         LESSTHAN PIDID GREATERTHAN | HASH PID LESSTHAN ID GREATERTHAN;
 etp_fun:         HASH FUN LESSTHAN (.)*? GREATERTHAN;
 etp_binary:      BINSTART (segments+=etp_binary_item (COMMA segments+=etp_binary_item)*)? BINEND;
-etp_binary_item: val=INT (COLON size=INT)? | STRING;
+etp_binary_item: val=INT (COLON size=INT)? | (strlines+=STRING ( strlines+=STRING )*)?;
 etp_binary_fake: HASH BIN LESSTHAN size=INT GREATERTHAN;
 
 etp_ref:    HASH REF LESSTHAN REFID GREATERTHAN;

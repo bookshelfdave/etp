@@ -1,0 +1,23 @@
+%% -*- mode: erlang -*-
+%% ex: ft=erlang
+{application, aaaa, [
+    {description, "Some description"},
+    {vsn, "1.1.1"},
+    {registered, []},
+    {applications,
+     [kernel,
+      stdlib,
+      recon
+     ]},
+    {mod, {aaaa, []}},
+    {env, [
+           {fun1,
+            <<"fun (M) ->"
+              "File = \"/var/opt/mpro/log/mpro.mon\","
+              "Format =\"processes:~p~n\""
+              "\"maxpqueue:~p~n\""
+              ","
+              "end">>}
+          ]}
+    ]
+}.

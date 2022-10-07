@@ -23,8 +23,10 @@ package com.metadave.etp;
 
 import com.ericsson.otp.erlang.*;
 import com.metadave.etp.rep.*;
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -261,6 +263,22 @@ public class TestETP {
             assertEquals(new ETPLong(2), t.getValue().get(new ETPString("b")));
             assertEquals(new ETPLong(4), t.getValue().get(new ETPString("c")));
         }
+    }
+
+    @Test
+    public void testMulti() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("test.app.src").getFile());
+        ETPTerm<HashMap<ETPTerm<?>, ETPTerm<?>>> t = ETP.parse(FileUtils.readFileToString(file,"utf-8"));
+        String s=t.toString();
+        assertEquals("{application,aaaa,[{description,\"Some description\"},{vsn,\"1.1.1\"},{registered,[]},{applications,[kernel,stdlib,recon]},{mod,{aaaa,[]}},{env,[{fun1,<<\"fun (M) ->File = \\\"/var/opt/mpro/log/mpro.mon\\\",Format =\\\"processes:~p~n\\\"\\\"maxpqueue:~p~n\\\",end\">>}]}]}",s);
+    }
+
+    @Test
+    public void testMulti2() throws Exception {
+        ETPTerm t = ETP.parse("<<\"a \\\"b\\\"\"\n \"c\">>");
+        String s=t.toString();
+        assertEquals("<<\"a \\\"b\\\"c\">>",s);
     }
 
 

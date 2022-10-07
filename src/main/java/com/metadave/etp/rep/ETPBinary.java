@@ -62,6 +62,12 @@ public class ETPBinary extends ETPTerm<List<ETPBinary.ETPBinaryValue>> {
         return b.toString();
     }
 
+    public String quote(String s) {
+        s=s.replace("\\","\\\\");
+        s=s.replace("\"","\\\"");
+        return s;
+    }
+
     @Override
     public OtpErlangObject getOTP() {
         return null;
@@ -127,7 +133,13 @@ public class ETPBinary extends ETPTerm<List<ETPBinary.ETPBinaryValue>> {
 
         @Override
         public String toString() {
-            return "\"" + value + "\"";
+            return "\"" + quote(value) + "\"";
+        }
+
+        public String quote(String s) {
+            s=s.replace("\\","\\\\");
+            s=s.replace("\"","\\\"");
+            return s;
         }
 
         @Override
